@@ -86,7 +86,7 @@ Page({
       apiAddid = 0;
     }
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/' + apiAddoRuPDATE,
+      url: app.globalData.urlPrefix + '/user/shipping-address/' + apiAddoRuPDATE,
       data: {
         token: wx.getStorageSync('token'),
         id: apiAddid,
@@ -184,7 +184,7 @@ Page({
       // 初始化原数据
       wx.showLoading();
       wx.request({
-        url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/detail',
+        url: app.globalData.urlPrefix + '/user/shipping-address/detail',
         data: {
           token: wx.getStorageSync('token'),
           id: id
@@ -242,7 +242,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/delete',
+            url: app.globalData.urlPrefix + '/user/shipping-address/delete',
             data: {
               token: wx.getStorageSync('token'),
               id: id

@@ -9,7 +9,7 @@ Page({
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/update',
+      url: app.globalData.urlPrefix +'/user/shipping-address/update',
       data: {
         token: wx.getStorageSync('token'),
         id:id,
@@ -44,7 +44,7 @@ Page({
   initShippingAddress: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/list',
+      url: app.globalData.urlPrefix +'/user/shipping-address/list',
       data: {
         token: wx.getStorageSync('token')
       },

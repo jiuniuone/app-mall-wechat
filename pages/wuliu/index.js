@@ -10,7 +10,7 @@ Page({
   onShow: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/detail',
+      url: app.globalData.urlPrefix + '/order/detail',
       data: {
         token: wx.getStorageSync('token'),
         id: that.data.orderId

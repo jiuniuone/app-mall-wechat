@@ -110,7 +110,7 @@ Page({
 
 
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/order/create',
+      url: app.globalData.urlPrefix +'/order/create',
       method:'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -169,7 +169,7 @@ Page({
   initShippingAddress: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/default',
+      url: app.globalData.urlPrefix +'/user/shipping-address/default',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -240,7 +240,7 @@ Page({
   getMyCoupons: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/my',
+      url: app.globalData.urlPrefix + '/discounts/my',
       data: {
         token: wx.getStorageSync('token'),
         status:0

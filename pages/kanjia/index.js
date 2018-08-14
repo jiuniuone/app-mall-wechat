@@ -25,7 +25,7 @@ Page({
     this.data.joiner = e.joiner;
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/detail',
+      url: app.globalData.urlPrefix +'/shop/goods/detail',
       data: {
         id: e.id
       },
@@ -59,7 +59,7 @@ Page({
   getVideoSrc: function (videoId) {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/media/video/detail',
+      url: app.globalData.urlPrefix + '/media/video/detail',
       data: {
         videoId: videoId
       },
@@ -75,7 +75,7 @@ Page({
   getKanjiaInfo: function (kjid, joiner) {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/info',
+      url: app.globalData.urlPrefix + '/shop/goods/kanjia/info',
       data: {
         kjid: kjid,
         joiner: joiner,
@@ -98,7 +98,7 @@ Page({
   getKanjiaInfoMyHelp: function (kjid, joiner) {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/myHelp',
+      url: app.globalData.urlPrefix + '/shop/goods/kanjia/myHelp',
       data: {
         kjid: kjid,
         joinerUser: joiner,
@@ -117,7 +117,7 @@ Page({
   helpKanjia: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/help',
+      url: app.globalData.urlPrefix + '/shop/goods/kanjia/help',
       data: {
         kjid: that.data.kjId,
         joinerUser: that.data.joiner,

@@ -45,7 +45,7 @@ Page({
     }
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/bindMobile',
+      url: app.globalData.urlPrefix + '/user/wxapp/bindMobile',
       data: {
         token: wx.getStorageSync('token'),
         encryptedData: e.detail.encryptedData,
@@ -72,7 +72,7 @@ Page({
   getUserApiInfo: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/detail',
+      url: app.globalData.urlPrefix + '/user/detail',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -90,7 +90,7 @@ Page({
   getUserAmount: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
+      url: app.globalData.urlPrefix + '/user/amount',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -109,7 +109,7 @@ Page({
   checkScoreSign: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/today-signed',
+      url: app.globalData.urlPrefix + '/score/today-signed',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -125,7 +125,7 @@ Page({
   scoresign: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/sign',
+      url: app.globalData.urlPrefix + '/score/sign',
       data: {
         token: wx.getStorageSync('token')
       },

@@ -30,7 +30,7 @@ Page({
         if (res.confirm) {
           wx.showLoading();
           wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/close',
+            url: app.globalData.urlPrefix + '/order/close',
             data: {
               token: wx.getStorageSync('token'),
               orderId: orderId
@@ -52,7 +52,7 @@ Page({
     var money = e.currentTarget.dataset.money;
     var needScore = e.currentTarget.dataset.score;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
+      url: app.globalData.urlPrefix + '/user/amount',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -71,7 +71,7 @@ Page({
           if (money <= 0) {
             // 直接使用余额支付
             wx.request({
-              url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/pay',
+              url: app.globalData.urlPrefix + '/order/pay',
               method:'POST',
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -108,7 +108,7 @@ Page({
   getOrderStatistics : function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/statistics',
+      url: app.globalData.urlPrefix + '/order/statistics',
       data: { token: wx.getStorageSync('token') },
       success: (res) => {
         wx.hideLoading();
@@ -157,7 +157,7 @@ Page({
     postData.status = that.data.currentType;
     this.getOrderStatistics();
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/list',
+      url: app.globalData.urlPrefix + '/order/list',
       data: postData,
       success: (res) => {
         wx.hideLoading();

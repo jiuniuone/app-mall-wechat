@@ -76,7 +76,7 @@ Page({
     let token = wx.getStorageSync('token');
     if (token) {
       wx.request({
-        url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/check-token',
+        url: app.globalData.urlPrefix + '/user/check-token',
         data: {
           token: token
         },
@@ -95,7 +95,7 @@ Page({
     wx.login({
       success: function (res) {
         wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/login',
+          url: app.globalData.urlPrefix + '/user/wxapp/login',
           data: {
             code: res.code
           },
@@ -135,7 +135,7 @@ Page({
             var encryptedData = res.encryptedData;
             // 下面开始调用注册接口
             wx.request({
-              url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/register/complex',
+              url: app.globalData.urlPrefix + '/user/wxapp/register/complex',
               data: { code: code, encryptedData: encryptedData, iv: iv }, // 设置请求的 参数
               success: (res) => {
                 wx.hideLoading();

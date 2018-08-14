@@ -58,7 +58,7 @@ Page({
       title: wx.getStorageSync('mallName')
     })
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/banner/list',
+      url: app.globalData.urlPrefix + '/banner/list',
       data: {
         key: 'mallName'
       },
@@ -77,7 +77,7 @@ Page({
       }
     }),
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/category/all',
+      url: app.globalData.urlPrefix +'/shop/goods/category/all',
       success: function(res) {
         var categories = [{id:0, name:"全部"}];
         if (res.data.code == 0) {
@@ -108,7 +108,7 @@ Page({
     console.log(categoryId)
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/list',
+      url: app.globalData.urlPrefix +'/shop/goods/list',
       data: {
         categoryId: categoryId,
         nameLike: that.data.searchInput
@@ -137,7 +137,7 @@ Page({
   getCoupons: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/coupons',
+      url: app.globalData.urlPrefix + '/discounts/coupons',
       data: {
         type: ''
       },
@@ -154,7 +154,7 @@ Page({
   gitCoupon : function (e) {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/fetch',
+      url: app.globalData.urlPrefix + '/discounts/fetch',
       data: {
         id: e.currentTarget.dataset.id,
         token: wx.getStorageSync('token')
@@ -223,7 +223,7 @@ Page({
   getNotice: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
+      url: app.globalData.urlPrefix + '/notice/list',
       data: { pageSize :5},
       success: function (res) {
         if (res.data.code == 0) {
