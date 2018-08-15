@@ -4,7 +4,7 @@ App({
         var that = this;
         //  获取商城名称
         wx.request({
-            url: that.globalData.urlPrefix + '/config/get-value',
+            url: that.globalData.urlPrefix + '/config',
             data: {
                 key: 'mallName'
             },
@@ -26,7 +26,7 @@ App({
             }
         })
         wx.request({
-            url: that.globalData.urlPrefix + '/config/get-value',
+            url: that.globalData.urlPrefix + '/config',
             data: {
                 key: 'recharge_amount_min'
             },
