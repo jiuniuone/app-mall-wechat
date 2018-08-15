@@ -64,20 +64,14 @@ Page({
             },
             success: function (res) {
                 if (res.data.code == 404) {
-                    wx.showModal({
-                        title: '提示',
-                        content: '请在后台添加 banner 轮播图片',
-                        showCancel: false
-                    })
+                    wx.showModal({title: '提示', content: '请在后台添加 banner 轮播图片', showCancel: false})
                 } else {
-                    that.setData({
-                        banners: res.data.data
-                    });
+                    that.setData({banners: res.data.data});
                 }
             }
         }),
             wx.request({
-                url: app.globalData.urlPrefix + '/shop/goods/category/all',
+                url: app.globalData.urlPrefix + '/product/category/all',
                 success: function (res) {
                     var categories = [{id: 0, name: "全部"}];
                     if (res.data.code == 0) {
@@ -108,7 +102,7 @@ Page({
         console.log(categoryId)
         var that = this;
         wx.request({
-            url: app.globalData.urlPrefix + '/shop/goods/list',
+            url: app.globalData.urlPrefix + '/product/list',
             data: {
                 categoryId: categoryId,
                 nameLike: that.data.searchInput

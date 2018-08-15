@@ -38,7 +38,7 @@ App({
         })
         // 获取砍价设置
         wx.request({
-            url: that.globalData.urlPrefix + '/shop/goods/kanjia/list',
+            url: that.globalData.urlPrefix + '/product/kanjia/list',
             data: {},
             success: function (res) {
                 if (res.data.code == 0) {

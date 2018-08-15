@@ -25,7 +25,7 @@ Page({
     this.data.joiner = e.joiner;
     var that = this;
     wx.request({
-      url: app.globalData.urlPrefix +'/shop/goods/detail',
+      url: app.globalData.urlPrefix +'/product/detail',
       data: {
         id: e.id
       },
@@ -75,7 +75,7 @@ Page({
   getKanjiaInfo: function (kjid, joiner) {
     var that = this;
     wx.request({
-      url: app.globalData.urlPrefix + '/shop/goods/kanjia/info',
+      url: app.globalData.urlPrefix + '/product/kanjia/info',
       data: {
         kjid: kjid,
         joiner: joiner,
@@ -98,7 +98,7 @@ Page({
   getKanjiaInfoMyHelp: function (kjid, joiner) {
     var that = this;
     wx.request({
-      url: app.globalData.urlPrefix + '/shop/goods/kanjia/myHelp',
+      url: app.globalData.urlPrefix + '/product/kanjia/myHelp',
       data: {
         kjid: kjid,
         joinerUser: joiner,
@@ -117,7 +117,7 @@ Page({
   helpKanjia: function () {
     var that = this;
     wx.request({
-      url: app.globalData.urlPrefix + '/shop/goods/kanjia/help',
+      url: app.globalData.urlPrefix + '/product/kanjia/help',
       data: {
         kjid: that.data.kjId,
         joinerUser: that.data.joiner,

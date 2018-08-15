@@ -207,7 +207,7 @@ Page({
       var carShopBean = list[parseInt(index)];
       var carShopBeanStores = 0;
       wx.request({
-        url: app.globalData.urlPrefix + '/shop/goods/detail',
+        url: app.globalData.urlPrefix + '/product/detail',
         data: {
           id: carShopBean.goodsId
         },
@@ -303,7 +303,7 @@ Page({
         // 获取价格和库存
         if (!carShopBean.propertyChildIds || carShopBean.propertyChildIds == "") {
           wx.request({
-            url: app.globalData.urlPrefix +'/shop/goods/detail',
+            url: app.globalData.urlPrefix +'/product/detail',
             data: {
               id: carShopBean.goodsId
             },
@@ -346,7 +346,7 @@ Page({
           })
         } else {
           wx.request({
-            url: app.globalData.urlPrefix +'/shop/goods/price',
+            url: app.globalData.urlPrefix +'/product/price',
             data: {
               goodsId: carShopBean.goodsId,
               propertyChildIds:carShopBean.propertyChildIds
