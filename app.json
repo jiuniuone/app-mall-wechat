@@ -2,7 +2,7 @@
   "pages":[
     "pages/start/start",
     "pages/index/index",
-    "pages/goods-details/index",
+    "pages/product/index",
     "pages/shop-cart/index",
     "pages/to-pay-order/index",
     "pages/select-address/index",

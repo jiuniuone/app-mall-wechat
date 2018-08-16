@@ -147,7 +147,7 @@ Page({
   },
   tobuy : function(){
     wx.navigateTo({
-      url: "/pages/goods-details/index?id=" + this.data.kanjiaInfo.kanjiaInfo.goodsId + "&kjId=" + this.data.kanjiaInfo.kanjiaInfo.kjId
+      url: "/pages/product/index?id=" + this.data.kanjiaInfo.kanjiaInfo.goodsId + "&kjId=" + this.data.kanjiaInfo.kanjiaInfo.kjId
     })
   }
 })
