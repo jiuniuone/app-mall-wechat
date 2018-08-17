@@ -1,5 +1,5 @@
-const app = getApp()
-
+const app = getApp();
+var util = require('../../utils/util.js');
 Page({
     data: {
         balance: 0,
@@ -8,24 +8,16 @@ Page({
         score_sign_continuous: 0
     },
     onLoad() {
-
     },
     onShow() {
         let that = this;
-        let userInfo = wx.getStorageSync('userInfo')
-        if (!userInfo) {
-            wx.navigateTo({
-                url: "/pages/authorize/index"
-            })
+        let member = wx.getStorageSync('member')
+        if (!member) {
+            wx.navigateTo({url: "/pages/authorize/index"});
         } else {
-            that.setData({
-                userInfo: userInfo,
-                version: app.globalData.version
-            })
+            that.setData({member: member, version: app.globalData.version});
         }
-        this.getUserApiInfo();
-        this.getUserAmount();
-        this.checkScoreSign();
+        this.loadMember();
     },
     aboutUs: function () {
         wx.showModal({
@@ -65,76 +57,28 @@ Page({
             }
         })
     },
-    getUserApiInfo: function () {
+    loadMember: function () {
         var that = this;
         wx.request({
-            url: app.globalData.urlPrefix + '/user/detail',
-            data: {
-                token: wx.getStorageSync('token')
-            },
+            url: app.globalData.urlPrefix + '/member/detail', data: {token: wx.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
-                    that.setData({
-                        apiUserInfoMap: res.data.data,
-                        userMobile: res.data.data.base.mobile
-                    });
+                    var member = res.data.data;
+                    that.setData({member: member});
                 }
             }
         })
 
-    },
-    getUserAmount: function () {
-        var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/user/amount',
-            data: {
-                token: wx.getStorageSync('token')
-            },
-            success: function (res) {
-                if (res.data.code == 0) {
-                    that.setData({
-                        balance: res.data.data.balance,
-                        freeze: res.data.data.freeze,
-                        score: res.data.data.score
-                    });
-                }
-            }
-        })
-
-    },
-    checkScoreSign: function () {
-        var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/score/today-signed',
-            data: {
-                token: wx.getStorageSync('token')
-            },
-            success: function (res) {
-                if (res.data.code == 0) {
-                    that.setData({
-                        score_sign_continuous: res.data.data.continuous
-                    });
-                }
-            }
-        })
     },
     scoresign: function () {
         var that = this;
         wx.request({
-            url: app.globalData.urlPrefix + '/score/sign',
-            data: {
-                token: wx.getStorageSync('token')
-            },
+            url: app.globalData.urlPrefix + '/member/sign', data: {token: wx.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
-                    that.getUserAmount();
-                    that.checkScoreSign();
+                    that.loadMember();
                 } else {
-                    wx.showModal({
-                        title: '错误',
-                        content: res.data.msg,
-                        showCancel: false
-                    })
+                    util.alert('错误', res.data.message);
                 }
             }
         })

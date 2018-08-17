@@ -22,7 +22,7 @@ Page({
         if (!e.detail.userInfo) {
             return;
         }
-        wx.setStorageSync('userInfo', e.detail.userInfo);
+        wx.setStorageSync('member', e.detail.userInfo);
         this.login();
     },
     login: function () {
@@ -58,7 +58,6 @@ Page({
                         }
                         wx.setStorageSync('token', res.data.data.token)
                         wx.setStorageSync('uid', res.data.data.uid)
-                        // 回到原来的地方放
                         wx.navigateBack();
                     }
                 })

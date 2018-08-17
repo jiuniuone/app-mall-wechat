@@ -8,7 +8,7 @@ Page({
         interval: 3000,
         duration: 1000,
         loadingHidden: false, // loading
-        userInfo: {},
+        member: {},
         swiperCurrent: 0,
         selectCurrent: 0,
         categories: [],
@@ -132,15 +132,9 @@ Page({
         var that = this;
         wx.request({
             url: app.globalData.urlPrefix + '/discounts/coupons',
-            data: {
-                type: ''
-            },
             success: function (res) {
                 if (res.data.code == 0) {
-                    that.setData({
-                        hasNoCoupons: false,
-                        coupons: res.data.data
-                    });
+                    that.setData({hasNoCoupons: false, coupons: res.data.data});
                 }
             }
         })

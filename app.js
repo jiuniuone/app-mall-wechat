@@ -121,7 +121,7 @@ App({
         }, 1000)
     },
     globalData: {
-        userInfo: null,
+        member: null,
         urlPrefix: "http://192.168.31.100/api/mall",
         version: "3.0.1",
         shareProfile: '百款精品商品，总有一款适合您' // 首页转发的时候话术

@@ -5,7 +5,7 @@ Page({
   data: {
     remind: '加载中',
     angle: 0,
-    userInfo: {}
+    member: {}
   },
   goToIndex:function(){
     wx.switchTab({
@@ -20,14 +20,14 @@ Page({
   },
   onShow:function(){
     let that = this
-    let userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
+    let member = wx.getStorageSync('member')
+    if (!member) {
       wx.navigateTo({
         url: "/pages/authorize/index"
       })
     } else {
       that.setData({
-        userInfo: userInfo
+        member: member
       })
     }
   },

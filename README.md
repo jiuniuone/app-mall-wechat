@@ -62,7 +62,7 @@
 >
 > 修改源码中  app.js 文件
 > > > globalData:{
->  userInfo:null,
+>  member:null,
 >  subDomain:"mall"
 >}
 > >
