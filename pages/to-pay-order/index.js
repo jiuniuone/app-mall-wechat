@@ -158,10 +158,10 @@ Page({
         postJsonString.keyword3 = { value: res.data.data.dateAdd, color: '#173177' }
         app.sendTempleMsg(res.data.data.id, 2,
           'Arm2aS1rsklRuJSrfz-QVoyUzLVmU2vEMn_HgMxuegw', e.detail.formId,
-          'pages/order-details/index?id=' + res.data.data.id, JSON.stringify(postJsonString));
+          'pages/order/details/index?id=' + res.data.data.id, JSON.stringify(postJsonString));
         // 下单成功，跳转到订单管理界面
         wx.redirectTo({
-          url: "/pages/order-list/index"
+          url: "/pages/order/list/index"
         });
       }
     })
@@ -229,12 +229,12 @@ Page({
   },
   addAddress: function () {
     wx.navigateTo({
-      url:"/pages/address-add/index"
+      url:"/pages/address/new/index"
     })
   },
   selectAddress: function () {
     wx.navigateTo({
-      url:"/pages/select-address/index"
+      url:"/pages/address/select/index"
     })
   },
   getMyCoupons: function () {
