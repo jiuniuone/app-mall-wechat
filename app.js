@@ -53,7 +53,7 @@ App({
             return
         }
         wx.request({
-            url: that.globalData.urlPrefix + '/user/check-token',
+            url: that.globalData.urlPrefix + '/member/check-token',
             data: {
                 token: token
             },

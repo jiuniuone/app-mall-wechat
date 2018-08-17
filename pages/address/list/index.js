@@ -9,7 +9,7 @@ Page({
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.request({
-      url: app.globalData.urlPrefix +'/user/shipping-address/update',
+      url: app.globalData.urlPrefix +'/address/update',
       data: {
         token: wx.getStorageSync('token'),
         id:id,
@@ -23,13 +23,13 @@ Page({
 
   addAddess : function () {
     wx.navigateTo({
-      url:"/pages/address/new/index"
+      url:"/pages/address/detail/index"
     })
   },
   
   editAddess: function (e) {
     wx.navigateTo({
-      url: "/pages/address/new/index?id=" + e.currentTarget.dataset.id
+      url: "/pages/address/detail/index?id=" + e.currentTarget.dataset.id
     })
   },
   
@@ -44,7 +44,7 @@ Page({
   initShippingAddress: function () {
     var that = this;
     wx.request({
-      url: app.globalData.urlPrefix +'/user/shipping-address/list',
+      url: app.globalData.urlPrefix +'/address/list',
       data: {
         token: wx.getStorageSync('token')
       },
