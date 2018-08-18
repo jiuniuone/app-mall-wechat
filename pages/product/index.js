@@ -22,7 +22,7 @@ Page({
         itemIds: "",
         itemNames: "",
         canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
-        shopCarInfo: {},
+        shoppingCartInfo: {},
         shopType: "addShopCar",//购物类型，加入购物车或立即购买，默认为加入购物车
     },
 
@@ -37,9 +37,9 @@ Page({
         that.data.kjId = e.kjId;
         // 获取购物车数据
         wx.getStorage({
-            key: 'shopCarInfo', success: function (res) {
+            key: 'shoppingCartInfo', success: function (res) {
                 that.setData({
-                    shopCarInfo: res.data,
+                    shoppingCartInfo: res.data,
                     shopNum: res.data.shopNum
                 });
             }
@@ -80,7 +80,7 @@ Page({
     },
     goShopCar: function () {
         wx.reLaunch({
-            url: "/pages/shop-cart/index"
+            url: "/pages/cart/index"
         });
     },
     toAddShopCar: function () {
@@ -223,17 +223,17 @@ Page({
             return;
         }
         //组建购物车
-        var shopCarInfo = this.bulidShopCarInfo();
+        var shoppingCartInfo = this.bulidShopCarInfo();
 
         this.setData({
-            shopCarInfo: shopCarInfo,
-            shopNum: shopCarInfo.shopNum
+            shoppingCartInfo: shoppingCartInfo,
+            shopNum: shoppingCartInfo.shopNum
         });
 
         // 写入本地存储
         wx.setStorage({
-            key: 'shopCarInfo',
-            data: shopCarInfo
+            key: 'shoppingCartInfo',
+            data: shoppingCartInfo
         })
         this.closePopupTap();
         wx.showToast({
@@ -241,9 +241,9 @@ Page({
             icon: 'success',
             duration: 2000
         })
-        //console.log(shopCarInfo);
+        //console.log(shoppingCartInfo);
 
-        //shopCarInfo = {shopNum:12,shopList:[]}
+        //shoppingCartInfo = {shopNum:12,shopList:[]}
     },
     /**
      * 立即购买
@@ -292,7 +292,7 @@ Page({
     bulidShopCarInfo: function () {
         // 加入购物车
         var shopCarMap = {};
-        shopCarMap.goodsId = this.data.product.id;
+        shopCarMap.productId = this.data.product.id;
         shopCarMap.pic = this.data.product.image_url;
         shopCarMap.name = this.data.product.name;
         shopCarMap.itemIds = this.data.itemIds;
@@ -306,38 +306,38 @@ Page({
         shopCarMap.logistics = this.data.product.logistics;
         shopCarMap.weight = this.data.product.weight;
 
-        var shopCarInfo = this.data.shopCarInfo;
-        if (!shopCarInfo.shopNum) {
-            shopCarInfo.shopNum = 0;
+        var shoppingCartInfo = this.data.shoppingCartInfo;
+        if (!shoppingCartInfo.shopNum) {
+            shoppingCartInfo.shopNum = 0;
         }
-        if (!shopCarInfo.shopList) {
-            shopCarInfo.shopList = [];
+        if (!shoppingCartInfo.shopList) {
+            shoppingCartInfo.shopList = [];
         }
-        var hasSameGoodsIndex = -1;
-        for (var i = 0; i < shopCarInfo.shopList.length; i++) {
-            var tmpShopCarMap = shopCarInfo.shopList[i];
-            if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.itemIds == shopCarMap.itemIds) {
-                hasSameGoodsIndex = i;
+        var hasSameProductIndex = -1;
+        for (var i = 0; i < shoppingCartInfo.shopList.length; i++) {
+            var tmpShopCarMap = shoppingCartInfo.shopList[i];
+            if (tmpShopCarMap.productId == shopCarMap.productId && tmpShopCarMap.itemIds == shopCarMap.itemIds) {
+                hasSameProductIndex = i;
                 shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
                 break;
             }
         }
 
-        shopCarInfo.shopNum = shopCarInfo.shopNum + this.data.buyNumber;
-        if (hasSameGoodsIndex > -1) {
-            shopCarInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
+        shoppingCartInfo.shopNum = shoppingCartInfo.shopNum + this.data.buyNumber;
+        if (hasSameProductIndex > -1) {
+            shoppingCartInfo.shopList.splice(hasSameProductIndex, 1, shopCarMap);
         } else {
-            shopCarInfo.shopList.push(shopCarMap);
+            shoppingCartInfo.shopList.push(shopCarMap);
         }
-        shopCarInfo.kjId = this.data.kjId;
-        return shopCarInfo;
+        shoppingCartInfo.kjId = this.data.kjId;
+        return shoppingCartInfo;
     },
     /**
      * 组建立即购买信息
      */
     buliduBuyNowInfo: function () {
         var shopCarMap = {};
-        shopCarMap.goodsId = this.data.product.id;
+        shopCarMap.productId = this.data.product.id;
         shopCarMap.pic = this.data.product.pic;
         shopCarMap.name = this.data.product.name;
         // shopCarMap.label=this.data.product.id; 规格尺寸
@@ -359,18 +359,18 @@ Page({
         if (!buyNowInfo.shopList) {
             buyNowInfo.shopList = [];
         }
-        /*    var hasSameGoodsIndex = -1;
+        /*    var hasSameProductIndex = -1;
             for (var i = 0; i < toBuyInfo.shopList.length; i++) {
               var tmpShopCarMap = toBuyInfo.shopList[i];
-              if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.itemIds == shopCarMap.itemIds) {
-                hasSameGoodsIndex = i;
+              if (tmpShopCarMap.productId == shopCarMap.productId && tmpShopCarMap.itemIds == shopCarMap.itemIds) {
+                hasSameProductIndex = i;
                 shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
                 break;
               }
             }
             toBuyInfo.shopNum = toBuyInfo.shopNum + this.data.buyNumber;
-            if (hasSameGoodsIndex > -1) {
-              toBuyInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
+            if (hasSameProductIndex > -1) {
+              toBuyInfo.shopList.splice(hasSameProductIndex, 1, shopCarMap);
             } else {
               toBuyInfo.shopList.push(shopCarMap);
             }*/
@@ -391,12 +391,12 @@ Page({
             }
         }
     },
-    reputation: function (goodsId) {
+    reputation: function (productId) {
         var that = this;
         wx.request({
             url: app.globalData.urlPrefix + '/product/reputation',
             data: {
-                goodsId: goodsId
+                productId: productId
             },
             success: function (res) {
                 if (res.data.code == 0) {
@@ -428,39 +428,39 @@ Page({
         var that = this;
         if (!app.globalData.kanjiaList || app.globalData.kanjiaList.length == 0) {
             that.setData({
-                curGoodsKanjia: null
+                curProductKanjia: null
             });
             return;
         }
-        let curGoodsKanjia = app.globalData.kanjiaList.find(ele => {
-            return ele.goodsId == gid
+        let curProductKanjia = app.globalData.kanjiaList.find(ele => {
+            return ele.productId == gid
         });
-        if (curGoodsKanjia) {
+        if (curProductKanjia) {
             that.setData({
-                curGoodsKanjia: curGoodsKanjia
+                curProductKanjia: curProductKanjia
             });
         } else {
             that.setData({
-                curGoodsKanjia: null
+                curProductKanjia: null
             });
         }
     },
     goKanjia: function () {
         var that = this;
-        if (!that.data.curGoodsKanjia) {
+        if (!that.data.curProductKanjia) {
             return;
         }
         wx.request({
             url: app.globalData.urlPrefix + '/product/kanjia/join',
             data: {
-                kjid: that.data.curGoodsKanjia.id,
+                kjid: that.data.curProductKanjia.id,
                 token: wx.getStorageSync('token')
             },
             success: function (res) {
                 if (res.data.code == 0) {
                     console.log(res.data);
                     wx.navigateTo({
-                        url: "/pages/kanjia/index?kjId=" + res.data.data.kjId + "&joiner=" + res.data.data.uid + "&id=" + res.data.data.goodsId
+                        url: "/pages/kanjia/index?kjId=" + res.data.data.kjId + "&joiner=" + res.data.data.uid + "&id=" + res.data.data.productId
                     })
                 } else {
                     wx.showModal({

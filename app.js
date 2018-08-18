@@ -65,54 +65,8 @@ App({
             }
         })
     },
-    sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString) {
-        var that = this;
-        wx.request({
-            url: that.globalData.urlPrefix + '/template-msg/put',
-            method: 'POST',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            data: {
-                token: wx.getStorageSync('token'),
-                type: 0,
-                module: 'order',
-                business_id: orderId,
-                trigger: trigger,
-                template_id: template_id,
-                form_id: form_id,
-                url: page,
-                postJsonString: postJsonString
-            },
-            success: (res) => {
-                //console.log('*********************');
-                //console.log(res.data);
-                //console.log('*********************');
-            }
-        })
-    },
-    sendTempleMsgImmediately: function (template_id, form_id, page, postJsonString) {
-        var that = this;
-        wx.request({
-            url: that.globalData.urlPrefix + '/template-msg/put',
-            method: 'POST',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            data: {
-                token: wx.getStorageSync('token'),
-                type: 0,
-                module: 'immediately',
-                template_id: template_id,
-                form_id: form_id,
-                url: page,
-                postJsonString: postJsonString
-            },
-            success: (res) => {
-                console.log(res.data);
-            }
-        })
-    },
+
+
     goLoginPageTimeOut: function () {
         setTimeout(function () {
             wx.navigateTo({

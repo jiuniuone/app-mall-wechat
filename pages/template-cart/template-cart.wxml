@@ -1,4 +1,4 @@
-<template name="no-goods">
+<template name="no-product">
     <view class="title-box">
         购物车空空如也～
     </view>
@@ -7,23 +7,23 @@
     </view>
 </template>
 
-<template name="cart-goods-list">
+<template name="cart-product-list">
     <view class="list-top">
         <view class="label">微商城</view>
         <view class="edit-btn" hidden="{{!saveHidden}}" bindtap="editTap">编辑</view>
         <view class="edit-btn" hidden="{{saveHidden}}" bindtap="saveTap">完成</view>
     </view>
-    <view class="goodsList">
+    <view class="productList">
         <view class="a-gooods" wx:for="{{list}}"  wx:key="{{index}}" >
-            <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"    style="{{item.left}}">
-                <view class="goods-info">
+            <view class="a-product-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"    style="{{item.left}}">
+                <view class="product-info">
                     <view class="img-box">
                         <image src="{{item.pic}}" class="img"/>
                     </view>
                     <view class="text-box">
-                        <view class="goods-title">{{item.name}}</view>
-                        <view class="goods-label">{{item.label}}</view>
-                        <view class="goods-price">¥ {{item.price}}</view>
+                        <view class="product-title">{{item.name}}</view>
+                        <view class="product-label">{{item.label}}</view>
+                        <view class="product-price">¥ {{item.price}}</view>
                         <view class="buy-num">
                             <view class="jian-btn {{item.number==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
                             <input  type="number" value="{{item.number}}" disabled/>

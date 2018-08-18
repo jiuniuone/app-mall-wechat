@@ -165,13 +165,13 @@ Page({
           that.setData({
             orderList: res.data.data.orderList,
             logisticsMap : res.data.data.logisticsMap,
-            goodsMap : res.data.data.goodsMap
+            productMap : res.data.data.productMap
           });
         } else {
           this.setData({
             orderList: null,
             logisticsMap: {},
-            goodsMap: {}
+            productMap: {}
           });
         }
       }

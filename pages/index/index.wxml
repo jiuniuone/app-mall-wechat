@@ -54,17 +54,17 @@
             </view>
         </scroll-view>
     </view>
-    <view class="goods-container">
-        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+    <view class="product-container">
+        <view class="product-box" wx:for-items="{{product}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
             <view class="img-box">
                 <image src="{{item.image_url}}_m" class="image" mode="aspectFill" lazy-load="true"/>
             </view>
-            <view class="goods-title">{{item.name}}</view>
+            <view class="product-title">{{item.name}}</view>
             <view style='display:flex;'>
-                <view class="goods-price">¥ {{item.price}}</view>
-                <view wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="goods-price" style='color:#aaa;text-decoration:line-through'>¥ {{item.originalPrice}}</view>
+                <view class="product-price">¥ {{item.price}}</view>
+                <view wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="product-price" style='color:#aaa;text-decoration:line-through'>¥ {{item.originalPrice}}</view>
             </view>
         </view>
     </view>
-    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-product">没有更多啦</view>
 </view>

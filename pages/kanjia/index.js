@@ -8,7 +8,7 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 1000,
-    goodsDetail:{},
+    productDetail:{},
     swiperCurrent: 0
   },
 
@@ -30,12 +30,12 @@ Page({
         id: e.id
       },
       success: function(res) {
-        that.data.goodsDetail = res.data.data;
+        that.data.productDetail = res.data.data;
         if (res.data.data.basicInfo.videoId) {
           that.getVideoSrc(res.data.data.basicInfo.videoId);
         }
         that.setData({
-          goodsDetail:res.data.data
+          productDetail:res.data.data
         });
         WxParse.wxParse('article', 'html', res.data.data.content, that, 5);
       }
@@ -147,7 +147,7 @@ Page({
   },
   tobuy : function(){
     wx.navigateTo({
-      url: "/pages/product/index?id=" + this.data.kanjiaInfo.kanjiaInfo.goodsId + "&kjId=" + this.data.kanjiaInfo.kanjiaInfo.kjId
+      url: "/pages/product/index?id=" + this.data.kanjiaInfo.kanjiaInfo.productId + "&kjId=" + this.data.kanjiaInfo.kanjiaInfo.kjId
     })
   }
 })

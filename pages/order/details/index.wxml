@@ -51,22 +51,22 @@
           </view>
         </block>
     </view>
-    <view class="goods-list">
+    <view class="product-list">
             <view class="list-title">商品信息</view>
             <form bindsubmit="submitReputation" report-submit="true">
-            <block wx:for-items="{{orderDetail.goods}}" wx:key="{{index}}">
-            <view class="a-goods">
+            <block wx:for-items="{{orderDetail.product}}" wx:key="{{index}}">
+            <view class="a-product">
                 <view class="img-box">
                     <image src="{{item.pic}}" class="img" />
                 </view>
                 <view class="text-box">
                     <view class="arow arow01">
-                        <view class="goods-name">{{item.goodsName}}</view>
-                        <view class="goods-price">¥ {{item.amount}}</view>
+                        <view class="product-name">{{item.productName}}</view>
+                        <view class="product-price">¥ {{item.amount}}</view>
                     </view>
                     <view class="arow">
-                        <view class="goods-label">{{item.property}}</view>
-                        <view class="goods-num">x {{item.number}}</view>
+                        <view class="product-label">{{item.property}}</view>
+                        <view class="product-num">x {{item.number}}</view>
                     </view>
                 </view>
             </view>
@@ -82,7 +82,7 @@
                   </view>
                   <view class="row-box" style="margin-top:35rpx">
                       <view class="row-label">备注</view>
-                      <input name="orderGoodsId{{index}}" value="{{item.id}}" style="display:none;"/>
+                      <input name="orderProductId{{index}}" value="{{item.id}}" style="display:none;"/>
                       <textarea name="goodReputationRemark{{index}}" style="margin-top:35rpx;width:100%;" value="非常愉快的一次购物！" />
                   </view>
             </view>
@@ -109,7 +109,7 @@
                 </view>
             </view>
         </view>
-        <view class="goods-info">
+        <view class="product-info">
             <view class="row-box">
                 <view class="row-label">商品金额</view>
                 <view class="right-text">¥ {{orderDetail.orderInfo.amount}}</view>

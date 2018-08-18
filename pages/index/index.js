@@ -13,7 +13,7 @@ Page({
         selectCurrent: 0,
         categories: [],
         activeCategoryId: 0,
-        goods: [],
+        product: [],
         scrollTop: 0,
         loadingMoreHidden: true,
 
@@ -26,7 +26,7 @@ Page({
         this.setData({
             activeCategoryId: e.currentTarget.id
         });
-        this.getGoodsList(this.data.activeCategoryId);
+        this.getProductList(this.data.activeCategoryId);
     },
     //事件处理函数
     swiperchange: function (e) {
@@ -83,7 +83,7 @@ Page({
                         categories: categories,
                         activeCategoryId: 0
                     });
-                    that.getGoodsList(0);
+                    that.getProductList(0);
                 }
             })
         that.getCoupons();
@@ -95,7 +95,7 @@ Page({
             scrollTop: e.scrollTop
         })
     },
-    getGoodsList: function (categoryId) {
+    getProductList: function (categoryId) {
         if (categoryId == 0) {
             categoryId = "";
         }
@@ -109,10 +109,10 @@ Page({
             },
             success: function (res) {
                 that.setData({
-                    goods: [],
+                    product: [],
                     loadingMoreHidden: true
                 });
-                var goods = [];
+                var product = [];
                 if (res.data.code != 0 || res.data.data.length == 0) {
                     that.setData({
                         loadingMoreHidden: false,
@@ -120,10 +120,10 @@ Page({
                     return;
                 }
                 for (var i = 0; i < res.data.data.length; i++) {
-                    goods.push(res.data.data[i]);
+                    product.push(res.data.data[i]);
                 }
                 that.setData({
-                    goods: goods,
+                    product: product,
                 });
             }
         })
@@ -225,6 +225,6 @@ Page({
 
     },
     toSearch: function () {
-        this.getGoodsList(this.data.activeCategoryId);
+        this.getProductList(this.data.activeCategoryId);
     }
 })
