@@ -19,7 +19,6 @@ Page({
         buyNumber: 0,
         buyNumMin: 1,
         buyNumMax: 0,
-
         itemIds: "",
         itemNames: "",
         canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
@@ -27,26 +26,18 @@ Page({
         shopType: "addShopCar",//购物类型，加入购物车或立即购买，默认为加入购物车
     },
 
-    //事件处理函数
     swiperchange: function (e) {
-        //console.log(e.detail.current)
-        this.setData({
-            swiperCurrent: e.detail.current
-        })
+        this.setData({swiperCurrent: e.detail.current})
     },
     onLoad: function (e) {
         if (e.inviter_id) {
-            wx.setStorage({
-                key: 'inviter_id_' + e.id,
-                data: e.inviter_id
-            })
+            wx.setStorage({key: 'inviter_id_' + e.id, data: e.inviter_id});
         }
         var that = this;
         that.data.kjId = e.kjId;
         // 获取购物车数据
         wx.getStorage({
-            key: 'shopCarInfo',
-            success: function (res) {
+            key: 'shopCarInfo', success: function (res) {
                 that.setData({
                     shopCarInfo: res.data,
                     shopNum: res.data.shopNum
@@ -54,10 +45,7 @@ Page({
             }
         })
         wx.request({
-            url: app.globalData.urlPrefix + '/product/detail',
-            data: {
-                id: e.id
-            },
+            url: app.globalData.urlPrefix + '/product/detail', data: {id: e.id},
             success: function (res) {
                 var selectSizeTemp = "";
                 var product = res.data.data;
@@ -125,17 +113,13 @@ Page({
      * 规格选择弹出框
      */
     bindGuiGeTap: function () {
-        this.setData({
-            hideShopPopup: false
-        })
+        this.setData({hideShopPopup: false})
     },
     /**
      * 规格选择弹出框隐藏
      */
     closePopupTap: function () {
-        this.setData({
-            hideShopPopup: true
-        })
+        this.setData({hideShopPopup: true})
     },
     numJianTap: function () {
         if (this.data.buyNumber > this.data.buyNumMin) {
@@ -165,7 +149,7 @@ Page({
         // 取消该分类下的子栏目所有的选中状态
         let propertyIndex = e.currentTarget.dataset.propertyindex;
         var childs = product.properties[propertyIndex].items;
-        let itemIndex = e.currentTarget.dataset.propertychildindex
+        let itemIndex = e.currentTarget.dataset.propertychildindex;
         for (var i = 0; i < childs.length; i++) {
             product.properties[propertyIndex].items[i].active = itemIndex == i;
         }
@@ -209,7 +193,6 @@ Page({
             });
 
         }
-
 
         this.setData({
             product: that.data.product,

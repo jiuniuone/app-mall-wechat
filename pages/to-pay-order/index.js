@@ -12,7 +12,6 @@ Page({
         allGoodsAndYunPrice: 0,
         goodsJsonStr: "",
         orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-
         hasNoCoupons: true,
         coupons: [],
         youhuijine: 0, //优惠券金额
@@ -21,19 +20,17 @@ Page({
     onShow: function () {
         var that = this;
         var shopList = [];
-        //立即购买下单
-        if ("buyNow" == that.data.orderType) {
+
+        if ("buyNow" == that.data.orderType) {//立即购买下单
             var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
             that.data.kjId = buyNowInfoMem.kjId;
             if (buyNowInfoMem && buyNowInfoMem.shopList) {
                 shopList = buyNowInfoMem.shopList
             }
-        } else {
-            //购物车下单
+        } else {//购物车下单
             var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
             that.data.kjId = shopCarInfoMem.kjId;
             if (shopCarInfoMem && shopCarInfoMem.shopList) {
-                // shopList = shopCarInfoMem.shopList
                 shopList = shopCarInfoMem.shopList.filter(entity => {
                     return entity.active;
                 });
