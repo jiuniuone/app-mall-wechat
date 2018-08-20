@@ -90,7 +90,8 @@
                     <view class="row-box" style="margin-top:35rpx">
                         <view class="row-label">备注</view>
                         <input name="orderProductId{{index}}" value="{{item.id}}" style="display:none;"/>
-                        <textarea name="goodReputationRemark{{index}}" style="margin-top:35rpx;width:100%;" value="非常愉快的一次购物！"/>
+                        <textarea name="goodReputationRemark{{index}}" style="margin-top:35rpx;width:100%;"
+                                  value="非常愉快的一次购物！"/>
                     </view>
                 </view>
             </block>

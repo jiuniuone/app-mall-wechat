@@ -43,7 +43,7 @@ Page({
             }
         })
         util.request({
-            url:   '/product/detail', data: {id: e.id},
+            url: '/product/detail', data: {id: e.id},
             success: function (res) {
                 var selectSizeTemp = "";
                 var product = res.data.data;
@@ -377,7 +377,7 @@ Page({
     reputation: function (productId) {
         var that = this;
         util.request({
-            url:   '/product/reputation',
+            url: '/product/reputation',
             data: {
                 productId: productId
             },
@@ -394,7 +394,7 @@ Page({
     getVideoSrc: function (videoId) {
         var that = this;
         util.request({
-            url:   '/media/video/detail',
+            url: '/media/video/detail',
             data: {
                 videoId: videoId
             },
@@ -434,7 +434,7 @@ Page({
             return;
         }
         util.request({
-            url:   '/product/kanjia/join',
+            url: '/product/kanjia/join',
             data: {
                 kjid: that.data.curProductKanjia.id,
                 token: util.getStorageSync('token')

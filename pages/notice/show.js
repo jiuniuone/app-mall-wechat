@@ -6,7 +6,7 @@ Page({
     onLoad: function (options) {
         var that = this;
         util.request({
-            url:   '/notice/detail',
+            url: '/notice/detail',
             data: {id: options.id},
             success: function (res) {
                 if (res.data.code == 0) {
@@ -16,11 +16,18 @@ Page({
             }
         })
     },
-    onReady: function () { },
-    onShow: function () {},
-    onHide: function () {},
-    onUnload: function () {},
-    onPullDownRefresh: function () {},
-    onReachBottom: function () {},
-    onShareAppMessage: function () {}
+    onReady: function () {
+    },
+    onShow: function () {
+    },
+    onHide: function () {
+    },
+    onUnload: function () {
+    },
+    onPullDownRefresh: function () {
+    },
+    onReachBottom: function () {
+    },
+    onShareAppMessage: function () {
+    }
 })

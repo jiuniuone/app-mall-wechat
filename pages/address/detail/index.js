@@ -155,7 +155,7 @@ Page({
         if (id) {
             wx.showLoading();
             util.request({
-                url:   '/address/detail',
+                url: '/address/detail',
                 data: {token: util.getStorageSync('token'), id: id},
                 success: function (res) {
                     wx.hideLoading();
@@ -209,7 +209,7 @@ Page({
             success: function (res) {
                 if (res.confirm) {
                     util.request({
-                        url:   '/address/delete',
+                        url: '/address/delete',
                         data: {
                             token: util.getStorageSync('token'),
                             id: id

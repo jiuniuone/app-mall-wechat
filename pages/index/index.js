@@ -57,7 +57,7 @@ Page({
             title: util.getStorageSync('mallName')
         })
         util.request({
-            url:   '/banner/list',
+            url: '/banner/list',
             data: {
                 key: 'mallName'
             },
@@ -70,7 +70,7 @@ Page({
             }
         }),
             util.request({
-                url:   '/product/category/all',
+                url: '/product/category/all',
                 success: function (res) {
                     var categories = [{id: 0, name: "全部"}];
                     if (res.data.code == 0) {
@@ -101,7 +101,7 @@ Page({
         console.log(categoryId)
         var that = this;
         util.request({
-            url:   '/product/list',
+            url: '/product/list',
             data: {
                 categoryId: categoryId,
                 nameLike: that.data.searchInput
@@ -130,7 +130,7 @@ Page({
     getCoupons: function () {
         var that = this;
         util.request({
-            url:   '/discounts/coupons',
+            url: '/discounts/coupons',
             success: function (res) {
                 if (res.data.code == 0) {
                     that.setData({hasNoCoupons: false, coupons: res.data.data});
@@ -141,7 +141,7 @@ Page({
     gitCoupon: function (e) {
         var that = this;
         util.request({
-            url:   '/discounts/fetch',
+            url: '/discounts/fetch',
             data: {
                 id: e.currentTarget.dataset.id,
                 token: util.getStorageSync('token')
@@ -210,7 +210,7 @@ Page({
     getNotice: function () {
         var that = this;
         util.request({
-            url:   '/notice/list',
+            url: '/notice/list',
             data: {pageSize: 5},
             success: function (res) {
                 if (res.data.code == 0) that.setData({noticeList: res.data.data});

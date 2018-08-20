@@ -1,6 +1,6 @@
 function orderPay(app, orderId, redirectUrl) {
     util.request({
-        url:   '/order/pay/wechat',
+        url: '/order/pay/wechat',
         data: {token: util.getStorageSync('token'), orderId: orderId},
         success: function (res) {
             if (res.data.code == 0) {
@@ -37,7 +37,7 @@ function wxpay(app, money, orderId, redirectUrl) {
         nextAction = {type: 0, id: orderId};
     }
     util.request({
-        url:   '/pay/wxapp/get-pay-data',
+        url: '/pay/wxapp/get-pay-data',
         data: {
             token: util.getStorageSync('token'),
             money: money,

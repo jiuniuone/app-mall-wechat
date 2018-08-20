@@ -14,7 +14,9 @@
             <view class="line-box"></view>
             <view class="a-row" wx:for-items="{{logisticsTraces}}" wx:key="{{index}}">
                 <view class="dot">
-                    <view class="active-dot" hidden="{{index== 0 ? false : true}}"><view class="yuan-red"></view></view>
+                    <view class="active-dot" hidden="{{index== 0 ? false : true}}">
+                        <view class="yuan-red"></view>
+                    </view>
                     <view class="default-dot" hidden="{{index== 0 ? true : false}}"></view>
                 </view>
                 <view class="info">

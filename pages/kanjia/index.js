@@ -24,7 +24,7 @@ Page({
         this.data.joiner = e.joiner;
         var that = this;
         util.request({
-            url:   '/product/detail',
+            url: '/product/detail',
             data: {
                 id: e.id
             },
@@ -58,7 +58,7 @@ Page({
     getVideoSrc: function (videoId) {
         var that = this;
         util.request({
-            url:   '/media/video/detail',
+            url: '/media/video/detail',
             data: {
                 videoId: videoId
             },
@@ -74,7 +74,7 @@ Page({
     getKanjiaInfo: function (kjid, joiner) {
         var that = this;
         util.request({
-            url:   '/product/kanjia/info',
+            url: '/product/kanjia/info',
             data: {
                 kjid: kjid,
                 joiner: joiner,
@@ -97,7 +97,7 @@ Page({
     getKanjiaInfoMyHelp: function (kjid, joiner) {
         var that = this;
         util.request({
-            url:   '/product/kanjia/myHelp',
+            url: '/product/kanjia/myHelp',
             data: {
                 kjid: kjid,
                 joinerUser: joiner,
@@ -116,7 +116,7 @@ Page({
     helpKanjia: function () {
         var that = this;
         util.request({
-            url:   '/product/kanjia/help',
+            url: '/product/kanjia/help',
             data: {
                 kjid: that.data.kjId,
                 joinerUser: that.data.joiner,

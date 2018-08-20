@@ -1,6 +1,7 @@
 <view class="container">
     <view class="member">
-        <image wx:if="{{member && member.avatar_url}}" class="member-avatar" src="{{ member.avatar_url }}" background-size="cover"></image>
+        <image wx:if="{{member && member.avatar_url}}" class="member-avatar" src="{{ member.avatar_url }}"
+               background-size="cover"></image>
         <text class="member-nickname">{{ member.nickname }}</text>
     </view>
     <view style="height:20rpx;background: #eee;width:100%;"></view>
@@ -15,8 +16,12 @@
     </view>
     <view class="my-item" style='background:none;display:flex;'>
         <view>当前积分 {{member.score}}</view>
-        <button wx:if="{{member.sign_continuous_days == 0}}" style='height:80rpx;margin-right:70rpx;' bindtap="scoresign">每日签到</button>
-        <button wx:if="{{member.sign_continuous_days > 0}}" disabled='true' style='height:80rpx;margin-right:70rpx;'>已连续{{member.sign_continuous_days}}天签到</button>
+        <button wx:if="{{member.sign_continuous_days == 0}}" style='height:80rpx;margin-right:70rpx;'
+                bindtap="scoresign">每日签到
+        </button>
+        <button wx:if="{{member.sign_continuous_days > 0}}" disabled='true' style='height:80rpx;margin-right:70rpx;'>
+            已连续{{member.sign_continuous_days}}天签到
+        </button>
     </view>
     <view class="my-item">
         <navigator url="/pages/order/list/index" hover-class="navigator-hover">我的订单</navigator>
@@ -39,7 +44,8 @@
     </view>
 
     <view style="height:20rpx;background: #eee;width:100%;"></view>
-    <view class="my-item" style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
+    <view class="my-item"
+          style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
         <button type="warn" bindtap="relogin">重新授权登录</button>
     </view>
 

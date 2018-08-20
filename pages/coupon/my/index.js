@@ -12,7 +12,7 @@ Page({
     getMyCoupons: function () {
         var that = this;
         util.request({
-            url:   '/discounts/my',
+            url: '/discounts/my',
             data: {token: util.getStorageSync('token'),},
             success: function (res) {
                 if (res.data.code == 0) {

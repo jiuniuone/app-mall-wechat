@@ -64,7 +64,7 @@ Page({
         if (that.data.curCoupon) postData.couponId = that.data.curCoupon.id;
         console.log(postData)
         util.request({
-            url:   '/order/create',
+            url: '/order/create',
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -105,7 +105,7 @@ Page({
     initShippingAddress: function () {
         var that = this;
         util.request({
-            url:   '/address/default',
+            url: '/address/default',
             data: {
                 token: util.getStorageSync('token')
             },
@@ -167,7 +167,7 @@ Page({
     getMyCoupons: function () {
         var that = this;
         util.request({
-            url:   '/discounts/my',
+            url: '/discounts/my',
             data: {
                 token: util.getStorageSync('token'),
                 status: 0

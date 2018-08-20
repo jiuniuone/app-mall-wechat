@@ -33,7 +33,7 @@ Page({
         }
         var that = this;
         util.request({
-            url:   '/user/wxapp/bindMobile',
+            url: '/user/wxapp/bindMobile',
             data: {
                 token: util.getStorageSync('token'),
                 encryptedData: e.detail.encryptedData,
@@ -60,7 +60,7 @@ Page({
     loadMember: function () {
         var that = this;
         util.request({
-            url:   '/member/detail', data: {token: util.getStorageSync('token')},
+            url: '/member/detail', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
                     var member = res.data.data;
@@ -73,7 +73,7 @@ Page({
     scoresign: function () {
         var that = this;
         util.request({
-            url:   '/member/sign', data: {token: util.getStorageSync('token')},
+            url: '/member/sign', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
                     that.loadMember();

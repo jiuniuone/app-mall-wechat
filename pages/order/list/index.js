@@ -54,14 +54,14 @@ Page({
         let orderId = order.id;
         let money = order.money;
         util.request({
-            url:   '/member/detail', data: {token: util.getStorageSync('token')},
+            url: '/member/detail', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
                     let member = res.data.data;
                     money = money - member.balance;
                     if (money <= 0) {
                         util.request({
-                            url:   '/order/pay/balance',
+                            url: '/order/pay/balance',
                             method: 'POST',
                             header: {'content-type': 'application/x-www-form-urlencoded'},
                             data: {token: util.getStorageSync('token'), orderId: orderId},
@@ -81,7 +81,7 @@ Page({
     getOrderStatistics: function () {
         let that = this;
         util.request({
-            url:   '/order/statistics',
+            url: '/order/statistics',
             data: {token: util.getStorageSync('token')},
             success: (res) => {
                 wx.hideLoading();
@@ -104,7 +104,7 @@ Page({
         let that = this;
         this.getOrderStatistics();
         util.request({
-            url:   '/order/list',
+            url: '/order/list',
             data: {token: util.getStorageSync('token'), status: that.data.currentType},
             success: (res) => {
                 wx.hideLoading();

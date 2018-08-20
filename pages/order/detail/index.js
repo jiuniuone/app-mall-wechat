@@ -16,7 +16,7 @@ Page({
     onShow: function () {
         var that = this;
         util.request({
-            url:   '/order/detail',
+            url: '/order/detail',
             data: {
                 token: util.getStorageSync('token'),
                 id: that.data.orderId
@@ -58,7 +58,7 @@ Page({
                 if (res.confirm) {
                     wx.showLoading();
                     util.request({
-                        url:   '/order/delivery',
+                        url: '/order/delivery',
                         data: {
                             token: util.getStorageSync('token'),
                             orderId: orderId
@@ -108,7 +108,7 @@ Page({
         postJsonString.reputations = reputations;
         wx.showLoading();
         util.request({
-            url:   '/order/reputation',
+            url: '/order/reputation',
             data: {
                 postJsonString: postJsonString
             },

@@ -54,13 +54,15 @@
         </view>
         <view style="width:550rpx;float:left;margin-left:35rpx;border-bottom:1px solid #eee;">
             <view>{{item.product.goodReputationRemark}}</view>
-            <view style="color: #B0B0B0;font-size:24rpx;">{{item.product.dateReputation}} {{item.product.property}}</view>
+            <view style="color: #B0B0B0;font-size:24rpx;">{{item.product.dateReputation}} {{item.product.property}}
+            </view>
         </view>
     </view>
 </view>
 <view class="footer-box">
     <view class="contact">
-        <contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp" size="27"></contact-button>
+        <contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp"
+                        size="27"></contact-button>
         <view style='position:absolute;bottom:10rpx;'>客服</view>
     </view>
     <view class="shopping-cart-btn" bindtap="goShopCar">
@@ -87,7 +89,9 @@
             <block wx:for="{{product.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
                 <view class="label">{{property.name}}</view>
                 <view class="label-item-box">
-                    <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.id}}" data-propertyname="{{property.name}}" data-propertychildindex="{{index}}"
+                    <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id"
+                          bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.id}}"
+                          data-propertyname="{{property.name}}" data-propertychildindex="{{index}}"
                           data-propertychildid="{{item.id}}" data-propertychildname="{{item.name}}">
                         {{item.name}}
                     </view>

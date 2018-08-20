@@ -30,7 +30,7 @@ Page({
         let token = util.getStorageSync('token');
         if (token) {
             util.request({
-                url:   '/member/check-token', data: {token: token},
+                url: '/member/check-token', data: {token: token},
                 success: function (res) {
                     if (res.data.code == 0) {
                         wx.navigateBack();
@@ -45,7 +45,7 @@ Page({
         wx.login({
             success: function (res) {
                 util.request({
-                    url:   '/member/login', data: {code: res.code},
+                    url: '/member/login', data: {code: res.code},
                     success: function (res) {
                         if (res.data.code == 10000) { // 去注册
                             that.registerUser();
@@ -72,7 +72,7 @@ Page({
                 wx.getUserInfo({
                     success: function (res) {
                         util.request({
-                            url:   '/member/register', data: {code: code, rawData: res.rawData, iv: res.iv},
+                            url: '/member/register', data: {code: code, rawData: res.rawData, iv: res.iv},
                             success: (res) => {
                                 wx.hideLoading();
                                 if (res.data.code == 0) {

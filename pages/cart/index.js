@@ -208,7 +208,7 @@ Page({
             var carShopBean = list[parseInt(index)];
             var carShopBeanStores = 0;
             util.request({
-                url:   '/product/detail',
+                url: '/product/detail',
                 data: {
                     id: carShopBean.productId
                 },
@@ -301,7 +301,7 @@ Page({
             }
             let carShopBean = shopList[i];
             util.request({
-                url:   '/product/detail?id=' + carShopBean.productId,
+                url: '/product/detail?id=' + carShopBean.productId,
                 success: function (res) {
                     doneNumber++;
                     var product = res.data.data;
