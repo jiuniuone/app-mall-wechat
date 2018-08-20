@@ -1,16 +1,18 @@
+let util = require("./util.js");
+
 function orderPay(app, orderId, redirectUrl) {
     util.request({
         url: '/order/pay/wechat',
         data: {token: util.getStorageSync('token'), orderId: orderId},
         success: function (res) {
             if (res.data.code == 0) {
-                // 发起支付
-                util.requestPayment({
-                    timeStamp: res.data.data.timeStamp,
-                    nonceStr: res.data.data.nonceStr,
-                    package: 'prepay_id=' + res.data.data.prepayId,
+                let data = res.data.data;
+                wx.requestPayment({
+                    timeStamp: data.timeStamp,
+                    nonceStr: data.nonceStr,
+                    package: 'prepay_id=' + data.prepayId,
                     signType: 'MD5',
-                    paySign: res.data.data.sign,
+                    paySign: data.sign,
                     fail: function (aaa) {
                         wx.showToast({title: '支付失败:' + aaa})
                     },
@@ -49,7 +51,7 @@ function wxpay(app, money, orderId, redirectUrl) {
         success: function (res) {
             if (res.data.code == 0) {
                 // 发起支付
-                util.requestPayment({
+                wx.requestPayment({
                     timeStamp: res.data.data.timeStamp,
                     nonceStr: res.data.data.nonceStr,
                     package: 'prepay_id=' + res.data.data.prepayId,

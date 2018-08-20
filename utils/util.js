@@ -1,9 +1,7 @@
 const urlPrefix = "http://192.168.1.176/api/mall";
 
 function request(obj) {
-    console.log(obj)
     obj.url = urlPrefix + obj.url;
-    console.log(obj)
     return wx.request(obj);
 }
 
@@ -39,6 +37,7 @@ function getStorageSync(name) {
 function navigateTo(obj) {
     return wx.navigateTo(obj);
 }
+
 
 module.exports = {
     formatTime: formatTime,
