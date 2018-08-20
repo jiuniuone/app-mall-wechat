@@ -5,34 +5,34 @@
             <view class="{{tabClass[index]}}"></view>
         </view>
     </view>
-    <view class="no-order" hidden="{{orderList ? true : false}}">
+    <view class="no-order" hidden="{{orders ? true : false}}">
         <image src="/images/no-order.png" class="no-order-img"></image>
         <view class="text">暂无订单</view>
     </view>
-    <view class="order-list" hidden="{{orderList ? false : true}}">
-        <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
+    <view class="order-list" hidden="{{orders ? false : true}}">
+        <view class="a-order" wx:for="{{orders}}" wx:for-index="index" wx:for-item="order">
             <view class="order-date">
-                <view class="date-box">下单时间：{{item.dateAdd}}</view>
-                <view class="status {{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
+                <view class="date-box">下单时间：{{order.created}}</view>
+                <view class="status {{(order.status==-1 || order.status==4) ? '':'red'}}">{{order.statusStr}}</view>
             </view>
-            <view class="product-info" bindtap="orderDetail" data-id="{{item.id}}">
+            <view class="product-info" bindtap="orderDetail" data-id="{{order.id}}">
                 <view class="product-des">
-                   <view>订单号:{{item.orderNumber}} </view>
-                   <view wx:if="{{item.remark && item.remark != ''}}">备注： {{item.remark}}</view>
+                   <view>订单号:{{order.order_number}} </view>
+                   <view wx:if="{{order.remark && order.remark != ''}}">备注： {{order.remark}}</view>
                 </view>
             </view>
             <view >
                 <scroll-view class="product-img-container" scroll-x="true">
-                    <view class="img-box" wx:for-items="{{productMap[item.id]}}" wx:key="{{index}}">
-                        <image src="{{item.pic}}" class="product-img"></image>
+                    <view class="img-box" wx:for="{{order.items}}" wx:for-index="itemIndex" wx:for-item="item">
+                        <image src="{{item.product_image}}" class="product-img"></image>
                     </view>
                 </scroll-view>
             </view>
             <view class="price-box">
-                <view class="total-price" wx:if="{{item.score <= 0}}">合计：¥ {{item.amountReal}}</view>
-                <view class="total-price" wx:if="{{item.score > 0}}">合计：¥ {{item.amountReal}} + {{item.score}} 积分</view>
-                <view class="btn cancel-btn" hidden="{{item.status==0? fslse : true}}" bindtap="cancelOrderTap"  data-id="{{item.id}}">取消订单</view>
-                <view class="btn topay-btn" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">马上付款</view>        
+                <view class="total-price" wx:if="{{item.score <= 0}}">合计：¥ {{order.amountReal}}</view>
+                <view class="total-price" wx:if="{{item.score > 0}}">合计：¥ {{order.amountReal}} + {{order.score}} 积分</view>
+                <view class="btn cancel-btn" hidden="{{order.status==0? false : true}}" bindtap="cancelOrderTap"  data-id="{{order.id}}">取消订单</view>
+                <view class="btn topay-btn" hidden="{{order.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{order.fee}}" data-score="{{order.score}}">马上付款</view>
             </view>  
         </view>
 

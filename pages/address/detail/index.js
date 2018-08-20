@@ -232,18 +232,20 @@ Page({
                 let diatrictName = res.countyName;
                 let retSelIdx = 0;
 
-                for (var i = 0; i < commonCityData.cityData.length; i++) {
-                    if (provinceName == commonCityData.cityData[i].name) {
+                for (let i = 0; i < commonCityData.cityData.length; i++) {
+                    let cityDatum = commonCityData.cityData[i];
+                    if (provinceName === cityDatum.name) {
                         let eventJ = {detail: {value: i}};
                         that.bindPickerProvinceChange(eventJ);
                         that.data.selProvinceIndex = i;
-                        for (var j = 0; j < commonCityData.cityData[i].cityList.length; j++) {
-                            if (cityName == commonCityData.cityData[i].cityList[j].name) {
+                        for (let j = 0; j < cityDatum.cityList.length; j++) {
+                            let cityListElement = cityDatum.cityList[j];
+                            if (cityName === cityListElement.name) {
                                 //that.data.selCityIndex = j;
                                 eventJ = {detail: {value: j}};
                                 that.bindPickerCityChange(eventJ);
-                                for (var k = 0; k < commonCityData.cityData[i].cityList[j].districtList.length; k++) {
-                                    if (diatrictName == commonCityData.cityData[i].cityList[j].districtList[k].name) {
+                                for (let k = 0; k < cityListElement.districtList.length; k++) {
+                                    if (diatrictName === cityListElement.districtList[k].name) {
                                         //that.data.selDistrictIndex = k;
                                         eventJ = {detail: {value: k}};
                                         that.bindPickerChange(eventJ);

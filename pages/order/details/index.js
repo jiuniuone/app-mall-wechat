@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js');
 var app = getApp();
 Page({
     data: {
@@ -23,16 +24,10 @@ Page({
             success: (res) => {
                 wx.hideLoading();
                 if (res.data.code != 0) {
-                    wx.showModal({
-                        title: '错误',
-                        content: res.data.msg,
-                        showCancel: false
-                    })
-                    return;
+                    util.alert("错误", res.data.message);
+                } else {
+                    that.setData({order: res.data.data});
                 }
-                that.setData({
-                    orderDetail: res.data.data
-                });
             }
         })
         var yunPrice = parseFloat(this.data.yunPrice);
@@ -73,7 +68,10 @@ Page({
                                 that.onShow();
                                 // 模板消息，提醒用户进行评价
                                 let postJsonString = {};
-                                postJsonString.keyword1 = {value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177'}
+                                postJsonString.keyword1 = {
+                                    value: that.data.orderDetail.orderInfo.orderNumber,
+                                    color: '#173177'
+                                }
                                 let keywords2 = '您已确认收货，期待您的再次光临！';
                                 if (app.globalData.order_reputation_score) {
                                     keywords2 += '立即好评，系统赠送您' + app.globalData.order_reputation_score + '积分奖励。';
