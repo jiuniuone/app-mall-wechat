@@ -1,5 +1,4 @@
-//index.js
-//获取应用实例
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
   data: {},
@@ -9,10 +8,10 @@ Page({
   },
   onShow: function () {
     var that = this;
-    wx.request({
-      url: app.globalData.urlPrefix + '/order/detail',
+    util.request({
+      url:   '/order/detail',
       data: {
-        token: wx.getStorageSync('token'),
+        token: util.getStorageSync('token'),
         id: that.data.orderId
       },
       success: (res) => {

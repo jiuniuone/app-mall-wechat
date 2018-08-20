@@ -42,8 +42,8 @@ Page({
                 });
             }
         })
-        wx.request({
-            url: app.globalData.urlPrefix + '/product/detail', data: {id: e.id},
+        util.request({
+            url:   '/product/detail', data: {id: e.id},
             success: function (res) {
                 var selectSizeTemp = "";
                 var product = res.data.data;
@@ -365,7 +365,7 @@ Page({
     onShareAppMessage: function () {
         return {
             title: this.data.product.name,
-            path: '/pages/product/index?id=' + this.data.product.id + '&inviter_id=' + wx.getStorageSync('uid'),
+            path: '/pages/product/index?id=' + this.data.product.id + '&inviter_id=' + util.getStorageSync('uid'),
             success: function (res) {
                 // 转发成功
             },
@@ -376,8 +376,8 @@ Page({
     },
     reputation: function (productId) {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/product/reputation',
+        util.request({
+            url:   '/product/reputation',
             data: {
                 productId: productId
             },
@@ -393,8 +393,8 @@ Page({
     },
     getVideoSrc: function (videoId) {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/media/video/detail',
+        util.request({
+            url:   '/media/video/detail',
             data: {
                 videoId: videoId
             },
@@ -433,11 +433,11 @@ Page({
         if (!that.data.curProductKanjia) {
             return;
         }
-        wx.request({
-            url: app.globalData.urlPrefix + '/product/kanjia/join',
+        util.request({
+            url:   '/product/kanjia/join',
             data: {
                 kjid: that.data.curProductKanjia.id,
-                token: wx.getStorageSync('token')
+                token: util.getStorageSync('token')
             },
             success: function (res) {
                 if (res.data.code == 0) {

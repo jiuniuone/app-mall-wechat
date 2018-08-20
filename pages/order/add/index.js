@@ -18,13 +18,13 @@ Page({
         var shopList = [];
         console.log(that.data);
         if ("buyNow" == that.data.orderType) {//立即购买下单
-            var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
+            var buyNowInfoMem = util.getStorageSync('buyNowInfo');
             that.data.kjId = buyNowInfoMem.kjId;
             if (buyNowInfoMem && buyNowInfoMem.shopList) {
                 shopList = buyNowInfoMem.shopList
             }
         } else {//购物车下单
-            var shoppingCartInfoMem = wx.getStorageSync('shoppingCartInfo');
+            var shoppingCartInfoMem = util.getStorageSync('shoppingCartInfo');
             that.data.kjId = shoppingCartInfoMem.kjId;
             if (shoppingCartInfoMem && shoppingCartInfoMem.shopList) {
                 shopList = shoppingCartInfoMem.shopList.filter(entity => {
@@ -43,7 +43,7 @@ Page({
     createOrder: function (e) {
         wx.showLoading();
         var that = this;
-        var loginToken = wx.getStorageSync('token');
+        var loginToken = util.getStorageSync('token');
         var remark = "";
         if (e) {
             remark = e.detail.value.remark; // 备注信息
@@ -63,8 +63,8 @@ Page({
         postData.addressId = that.data.curAddressData.id;
         if (that.data.curCoupon) postData.couponId = that.data.curCoupon.id;
         console.log(postData)
-        wx.request({
-            url: app.globalData.urlPrefix + '/order/create',
+        util.request({
+            url:   '/order/create',
             method: 'POST',
             header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -104,10 +104,10 @@ Page({
     },
     initShippingAddress: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/address/default',
+        util.request({
+            url:   '/address/default',
             data: {
-                token: wx.getStorageSync('token')
+                token: util.getStorageSync('token')
             },
             success: (res) => {
                 if (res.data.code == 0) {
@@ -137,7 +137,7 @@ Page({
                 productJsonStrTmp = ",";
             }
             let inviter_id = 0;
-            let inviter_id_storge = wx.getStorageSync('inviter_id_' + carShopBean.productId);
+            let inviter_id_storge = util.getStorageSync('inviter_id_' + carShopBean.productId);
             if (inviter_id_storge) {
                 inviter_id = inviter_id_storge;
             }
@@ -166,10 +166,10 @@ Page({
     },
     getMyCoupons: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/discounts/my',
+        util.request({
+            url:   '/discounts/my',
             data: {
-                token: wx.getStorageSync('token'),
+                token: util.getStorageSync('token'),
                 status: 0
             },
             success: function (res) {

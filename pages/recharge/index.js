@@ -1,4 +1,5 @@
 var wxpay = require('../../utils/pay.js')
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
 
@@ -18,7 +19,7 @@ Page({
       recharge_amount_min = 0;
     }
     this.setData({
-      uid: wx.getStorageSync('uid'),
+      uid: util.getStorageSync('uid'),
       recharge_amount_min: recharge_amount_min
     });
   },

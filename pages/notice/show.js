@@ -1,11 +1,12 @@
 var app = getApp();
 var WxParse = require('../../wxParse/wxParse.js');
+var util = require('../../utils/util.js')
 Page({
     data: {},
     onLoad: function (options) {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/notice/detail',
+        util.request({
+            url:   '/notice/detail',
             data: {id: options.id},
             success: function (res) {
                 if (res.data.code == 0) {

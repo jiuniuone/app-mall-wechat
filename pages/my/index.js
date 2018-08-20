@@ -11,7 +11,7 @@ Page({
     },
     onShow() {
         let that = this;
-        let member = wx.getStorageSync('member')
+        let member = util.getStorageSync('member')
         if (!member) {
             wx.navigateTo({url: "/pages/authorize/index"});
         } else {
@@ -32,10 +32,10 @@ Page({
             return;
         }
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/user/wxapp/bindMobile',
+        util.request({
+            url:   '/user/wxapp/bindMobile',
             data: {
-                token: wx.getStorageSync('token'),
+                token: util.getStorageSync('token'),
                 encryptedData: e.detail.encryptedData,
                 iv: e.detail.iv
             },
@@ -59,8 +59,8 @@ Page({
     },
     loadMember: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/member/detail', data: {token: wx.getStorageSync('token')},
+        util.request({
+            url:   '/member/detail', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
                     var member = res.data.data;
@@ -72,8 +72,8 @@ Page({
     },
     scoresign: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/member/sign', data: {token: wx.getStorageSync('token')},
+        util.request({
+            url:   '/member/sign', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
                     that.loadMember();

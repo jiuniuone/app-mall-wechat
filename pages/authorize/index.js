@@ -1,4 +1,4 @@
-// pages/authorize/index.js
+var util = require('../../utils/util.js')
 var app = getApp();
 Page({
     data: {},
@@ -27,10 +27,10 @@ Page({
     },
     login: function () {
         let that = this;
-        let token = wx.getStorageSync('token');
+        let token = util.getStorageSync('token');
         if (token) {
-            wx.request({
-                url: app.globalData.urlPrefix + '/member/check-token', data: {token: token},
+            util.request({
+                url:   '/member/check-token', data: {token: token},
                 success: function (res) {
                     if (res.data.code == 0) {
                         wx.navigateBack();
@@ -44,8 +44,8 @@ Page({
         }
         wx.login({
             success: function (res) {
-                wx.request({
-                    url: app.globalData.urlPrefix + '/member/login', data: {code: res.code},
+                util.request({
+                    url:   '/member/login', data: {code: res.code},
                     success: function (res) {
                         if (res.data.code == 10000) { // 去注册
                             that.registerUser();
@@ -71,8 +71,8 @@ Page({
                 var code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
                 wx.getUserInfo({
                     success: function (res) {
-                        wx.request({
-                            url: app.globalData.urlPrefix + '/member/register', data: {code: code, rawData: res.rawData, iv: res.iv},
+                        util.request({
+                            url:   '/member/register', data: {code: code, rawData: res.rawData, iv: res.iv},
                             success: (res) => {
                                 wx.hideLoading();
                                 if (res.data.code == 0) {

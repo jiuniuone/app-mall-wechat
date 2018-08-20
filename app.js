@@ -1,10 +1,10 @@
-
+var util = require('./utils/util.js')
 App({
     onLaunch: function () {
         var that = this;
         //  获取商城名称
-        wx.request({
-            url: that.globalData.urlPrefix + '/config',
+        util.request({
+            url: '/config',
             data: {
                 key: 'mallName'
             },
@@ -14,8 +14,8 @@ App({
                 }
             }
         })
-        wx.request({
-            url: that.globalData.urlPrefix + '/score/send/rule',
+        util.request({
+            url: '/score/send/rule',
             data: {
                 code: 'goodReputation'
             },
@@ -25,8 +25,8 @@ App({
                 }
             }
         })
-        wx.request({
-            url: that.globalData.urlPrefix + '/config',
+        util.request({
+            url: '/config',
             data: {
                 key: 'recharge_amount_min'
             },
@@ -37,8 +37,8 @@ App({
             }
         })
         // 获取砍价设置
-        wx.request({
-            url: that.globalData.urlPrefix + '/product/kanjia/list',
+        util.request({
+            url: '/product/kanjia/list',
             data: {},
             success: function (res) {
                 if (res.data.code == 0) {
@@ -47,13 +47,13 @@ App({
             }
         })
         // 判断是否登录
-        let token = wx.getStorageSync('token');
+        let token = util.getStorageSync('token');
         if (!token) {
             that.goLoginPageTimeOut()
             return
         }
-        wx.request({
-            url: that.globalData.urlPrefix + '/member/check-token',
+        util.request({
+            url: '/member/check-token',
             data: {
                 token: token
             },
@@ -78,7 +78,7 @@ App({
         member: null,
         //urlPrefix: "http://192.168.31.100/api/mall",
         //urlPrefix: "http://192.168.31.80/api/mall",
-        urlPrefix: "http://192.168.1.176/api/mall",
+
         version: "3.0.1",
         shareProfile: '百款精品商品，总有一款适合您' // 首页转发的时候话术
     }

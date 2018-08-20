@@ -1,3 +1,13 @@
+const urlPrefix = "http://192.168.1.176/api/mall";
+
+function request(obj) {
+    console.log(obj)
+    obj.url = urlPrefix + obj.url;
+    console.log(obj)
+    return wx.request(obj);
+}
+
+
 function formatTime(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
@@ -21,9 +31,10 @@ function hideLoading() {
     return wx.hideLoading();
 }
 
-function request(obj) {
-    return wx.request(obj);
+function getStorageSync(name) {
+    return wx.getStorageSync(name);
 }
+
 
 function navigateTo(obj) {
     return wx.navigateTo(obj);
@@ -35,4 +46,6 @@ module.exports = {
     hideLoading: hideLoading,
     request: request,
     navigateTo: navigateTo,
+    request: request,
+    getStorageSync: getStorageSync,
 }

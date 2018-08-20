@@ -41,7 +41,7 @@ Page({
     onShow: function () {
         var shopList = [];
         // 获取购物车数据
-        var shoppingCartInfoMem = wx.getStorageSync('shoppingCartInfo');
+        var shoppingCartInfoMem = util.getStorageSync('shoppingCartInfo');
         if (shoppingCartInfoMem && shoppingCartInfoMem.shopList) {
             shopList = shoppingCartInfoMem.shopList
         }
@@ -208,7 +208,7 @@ Page({
             var carShopBean = list[parseInt(index)];
             var carShopBeanStores = 0;
             util.request({
-                url: app.globalData.urlPrefix + '/product/detail',
+                url:   '/product/detail',
                 data: {
                     id: carShopBean.productId
                 },
@@ -281,7 +281,7 @@ Page({
         }
         // 重新计算价格，判断库存
         var shopList = [];
-        var shoppingCartInfoMem = wx.getStorageSync('shoppingCartInfo');
+        var shoppingCartInfoMem = util.getStorageSync('shoppingCartInfo');
         if (shoppingCartInfoMem && shoppingCartInfoMem.shopList) {
             shopList = shoppingCartInfoMem.shopList.filter(entity => {
                 return entity.active;
@@ -301,7 +301,7 @@ Page({
             }
             let carShopBean = shopList[i];
             util.request({
-                url: app.globalData.urlPrefix + '/product/detail?id=' + carShopBean.productId,
+                url:   '/product/detail?id=' + carShopBean.productId,
                 success: function (res) {
                     doneNumber++;
                     var product = res.data.data;

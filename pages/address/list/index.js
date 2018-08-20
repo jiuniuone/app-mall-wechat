@@ -1,5 +1,4 @@
-//index.js
-//获取应用实例
+var util = require('../../../utils/util.js')
 var app = getApp()
 Page({
   data: {
@@ -8,10 +7,10 @@ Page({
 
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
-    wx.request({
-      url: app.globalData.urlPrefix +'/address/update',
+    util.request({
+      url:  '/address/update',
       data: {
-        token: wx.getStorageSync('token'),
+        token: util.getStorageSync('token'),
         id:id,
         isDefault:'true'
       },
@@ -43,10 +42,10 @@ Page({
   },
   initShippingAddress: function () {
     var that = this;
-    wx.request({
-      url: app.globalData.urlPrefix +'/address/list',
+    util.request({
+      url:  '/address/list',
       data: {
-        token: wx.getStorageSync('token')
+        token: util.getStorageSync('token')
       },
       success: (res) =>{
         if (res.data.code == 0) {

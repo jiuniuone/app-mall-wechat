@@ -26,16 +26,16 @@ Page({
         var isDefault = e.detail.value.isDefault;
 
         if (linkMan == "") {
-            return util.alert('提示','请填写联系人姓名');
+            return util.alert('提示', '请填写联系人姓名');
         }
         if (mobile == "") {
-            return util.alert('提示','请填写手机号码');
+            return util.alert('提示', '请填写手机号码');
         }
         if (this.data.selProvince == "请选择") {
-            return util.alert('提示','请选择地区');
+            return util.alert('提示', '请选择地区');
         }
         if (this.data.selCity == "请选择") {
-            return util.alert('提示','请选择地区');
+            return util.alert('提示', '请选择地区');
         }
         var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
         var districtId;
@@ -45,10 +45,10 @@ Page({
             districtId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[this.data.selDistrictIndex].id;
         }
         if (address == "") {
-            return util.alert('提示','请填写详细地址');
+            return util.alert('提示', '请填写详细地址');
         }
         if (code == "") {
-            return util.alert('提示','请填写邮编');
+            return util.alert('提示', '请填写邮编');
         }
         var apiAddoRuPDATE = "add";
         var apiAddid = that.data.id;
@@ -57,10 +57,10 @@ Page({
         } else {
             apiAddid = 0;
         }
-        wx.request({
-            url: app.globalData.urlPrefix + '/address/' + apiAddoRuPDATE,
+        util.request({
+            url: '/address/' + apiAddoRuPDATE,
             data: {
-                token: wx.getStorageSync('token'),
+                token: util.getStorageSync('token'),
                 id: apiAddid,
                 provinceId: commonCityData.cityData[this.data.selProvinceIndex].id,
                 cityId: cityId,
@@ -154,9 +154,9 @@ Page({
         var id = e.id;
         if (id) {
             wx.showLoading();
-            wx.request({
-                url: app.globalData.urlPrefix + '/address/detail',
-                data: {  token: wx.getStorageSync('token'), id: id  },
+            util.request({
+                url:   '/address/detail',
+                data: {token: util.getStorageSync('token'), id: id},
                 success: function (res) {
                     wx.hideLoading();
                     if (res.data.code == 0) {
@@ -198,7 +198,8 @@ Page({
             }
         }
     },
-    selectCity: function () {  },
+    selectCity: function () {
+    },
     deleteAddress: function (e) {
         var that = this;
         var id = e.currentTarget.dataset.id;
@@ -207,10 +208,10 @@ Page({
             content: '确定要删除该收货地址吗？',
             success: function (res) {
                 if (res.confirm) {
-                    wx.request({
-                        url: app.globalData.urlPrefix + '/address/delete',
+                    util.request({
+                        url:   '/address/delete',
                         data: {
-                            token: wx.getStorageSync('token'),
+                            token: util.getStorageSync('token'),
                             id: id
                         },
                         success: (res) => {

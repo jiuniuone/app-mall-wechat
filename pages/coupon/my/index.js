@@ -1,5 +1,4 @@
-//index.js
-//获取应用实例
+var util = require('../../../utils/util.js')
 var app = getApp()
 Page({
     data: {
@@ -12,9 +11,9 @@ Page({
     },
     getMyCoupons: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/discounts/my',
-            data: {token: wx.getStorageSync('token'),},
+        util.request({
+            url:   '/discounts/my',
+            data: {token: util.getStorageSync('token'),},
             success: function (res) {
                 if (res.data.code == 0) {
                     var coupons = res.data.data;

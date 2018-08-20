@@ -15,10 +15,10 @@ Page({
     },
     onShow: function () {
         var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/order/detail',
+        util.request({
+            url:   '/order/detail',
             data: {
-                token: wx.getStorageSync('token'),
+                token: util.getStorageSync('token'),
                 id: that.data.orderId
             },
             success: (res) => {
@@ -57,10 +57,10 @@ Page({
             success: function (res) {
                 if (res.confirm) {
                     wx.showLoading();
-                    wx.request({
-                        url: app.globalData.urlPrefix + '/order/delivery',
+                    util.request({
+                        url:   '/order/delivery',
                         data: {
-                            token: wx.getStorageSync('token'),
+                            token: util.getStorageSync('token'),
                             orderId: orderId
                         },
                         success: (res) => {
@@ -88,7 +88,7 @@ Page({
         let that = this;
         let formId = e.detail.formId;
         let postJsonString = {};
-        postJsonString.token = wx.getStorageSync('token');
+        postJsonString.token = util.getStorageSync('token');
         postJsonString.orderId = this.data.orderId;
         let reputations = [];
         let i = 0;
@@ -107,8 +107,8 @@ Page({
         }
         postJsonString.reputations = reputations;
         wx.showLoading();
-        wx.request({
-            url: app.globalData.urlPrefix + '/order/reputation',
+        util.request({
+            url:   '/order/reputation',
             data: {
                 postJsonString: postJsonString
             },

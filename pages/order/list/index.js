@@ -1,5 +1,6 @@
-var wxpay = require('../../../utils/pay.js');
-var app = getApp();
+let wxpay = require('../../../utils/pay.js');
+let util = require('../../../utils/util.js');
+let app = getApp();
 Page({
     data: {
         statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
@@ -7,7 +8,7 @@ Page({
         tabClass: ["", "", "", "", ""]
     },
     statusTap: function (e) {
-        var curType = e.currentTarget.dataset.index;
+        let curType = e.currentTarget.dataset.index;
         this.data.currentType = curType
         this.setData({
             currentType: curType
@@ -15,24 +16,24 @@ Page({
         this.onShow();
     },
     orderDetail: function (e) {
-        var orderId = e.currentTarget.dataset.id;
+        let orderId = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: "/pages/order/detail/index?id=" + orderId
         })
     },
     cancelOrderTap: function (e) {
-        var that = this;
-        var orderId = e.currentTarget.dataset.id;
+        let that = this;
+        let orderId = e.currentTarget.dataset.id;
         wx.showModal({
             title: '确定要取消该订单吗？',
             content: '',
             success: function (res) {
                 if (res.confirm) {
                     wx.showLoading();
-                    wx.request({
-                        url: app.globalData.urlPrefix + '/order/close',
+                    util.request({
+                        url: '/order/close',
                         data: {
-                            token: wx.getStorageSync('token'),
+                            token: util.getStorageSync('token'),
                             id: orderId
                         },
                         success: (res) => {
@@ -47,40 +48,24 @@ Page({
         })
     },
     toPayTap: function (e) {
-        var that = this;
-        var orderId = e.currentTarget.dataset.id;
-        var money = e.currentTarget.dataset.money;
-        var needScore = e.currentTarget.dataset.score;
-        wx.request({
-            url: app.globalData.urlPrefix + '/user/amount',
-            data: {
-                token: wx.getStorageSync('token')
-            },
+        let that = this;
+        let order = e.currentTarget.dataset;
+        console.log("order", e.currentTarget)
+        let orderId = order.id;
+        let money = order.money;
+        util.request({
+            url:   '/member/detail', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
-                    // res.data.data.balance
-                    money = money - res.data.data.balance;
-                    if (res.data.data.score < needScore) {
-                        wx.showModal({
-                            title: '错误',
-                            content: '您的积分不足，无法支付',
-                            showCancel: false
-                        })
-                        return;
-                    }
+                    let member = res.data.data;
+                    money = money - member.balance;
                     if (money <= 0) {
-                        // 直接使用余额支付
-                        wx.request({
-                            url: app.globalData.urlPrefix + '/order/pay',
+                        util.request({
+                            url:   '/order/pay/balance',
                             method: 'POST',
-                            header: {
-                                'content-type': 'application/x-www-form-urlencoded'
-                            },
-                            data: {
-                                token: wx.getStorageSync('token'),
-                                orderId: orderId
-                            },
-                            success: function (res2) {
+                            header: {'content-type': 'application/x-www-form-urlencoded'},
+                            data: {token: util.getStorageSync('token'), orderId: orderId},
+                            success: function (payResponse) {
                                 that.onShow();
                             }
                         })
@@ -88,20 +73,16 @@ Page({
                         wxpay.wxpay(app, money, orderId, "/pages/order/list/index");
                     }
                 } else {
-                    wx.showModal({
-                        title: '错误',
-                        content: '无法获取用户资金信息',
-                        showCancel: false
-                    })
+                    util.alert('错误', '无法获取用户资金信息');
                 }
             }
         })
     },
     getOrderStatistics: function () {
-        var that = this;
-        wx.request({
-            url: app.globalData.urlPrefix + '/order/statistics',
-            data: {token: wx.getStorageSync('token')},
+        let that = this;
+        util.request({
+            url:   '/order/statistics',
+            data: {token: util.getStorageSync('token')},
             success: (res) => {
                 wx.hideLoading();
                 if (res.data.code == 0) {
@@ -120,10 +101,11 @@ Page({
     },
     onShow: function () {
         wx.showLoading();
-        var that = this;
+        let that = this;
         this.getOrderStatistics();
-        wx.request({
-            url: app.globalData.urlPrefix + '/order/list', data: {token:wx.getStorageSync('token'),status:that.data.currentType},
+        util.request({
+            url:   '/order/list',
+            data: {token: util.getStorageSync('token'), status: that.data.currentType},
             success: (res) => {
                 wx.hideLoading();
                 let orders = res.data.code == 0 ? res.data.data : null;
