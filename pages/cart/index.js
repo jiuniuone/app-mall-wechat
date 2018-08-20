@@ -327,6 +327,6 @@ Page({
     },
     navigateToPayOrder: function () {
         util.hideLoading();
-        util.navigateTo({url: "/pages/to-pay-order/index"})
+        util.navigateTo({url: "/pages/order/add/index"})
     }
 });

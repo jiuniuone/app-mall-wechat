@@ -17,7 +17,7 @@ Page({
     orderDetail: function (e) {
         var orderId = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: "/pages/order/details/index?id=" + orderId
+            url: "/pages/order/detail/index?id=" + orderId
         })
     },
     cancelOrderTap: function (e) {

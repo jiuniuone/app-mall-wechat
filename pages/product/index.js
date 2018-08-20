@@ -1,8 +1,6 @@
-//index.js
-//获取应用实例
-var app = getApp();
-var WxParse = require('../../wxParse/wxParse.js');
-
+let app = getApp();
+let WxParse = require('../../wxParse/wxParse.js');
+let util = require('../../utils/util.js');
 Page({
     data: {
         autoplay: true,
@@ -283,7 +281,7 @@ Page({
         this.closePopupTap();
 
         wx.navigateTo({
-            url: "/pages/to-pay-order/index?orderType=buyNow"
+            url: "/pages/order/add/index?orderType=buyNow"
         })
     },
     /**
@@ -337,8 +335,9 @@ Page({
      */
     buliduBuyNowInfo: function () {
         var shopCarMap = {};
+        console.log(this.data.product);
         shopCarMap.productId = this.data.product.id;
-        shopCarMap.pic = this.data.product.pic;
+        shopCarMap.image_url = this.data.product.image_url;
         shopCarMap.name = this.data.product.name;
         // shopCarMap.label=this.data.product.id; 规格尺寸
         shopCarMap.itemIds = this.data.itemIds;
@@ -359,22 +358,6 @@ Page({
         if (!buyNowInfo.shopList) {
             buyNowInfo.shopList = [];
         }
-        /*    var hasSameProductIndex = -1;
-            for (var i = 0; i < toBuyInfo.shopList.length; i++) {
-              var tmpShopCarMap = toBuyInfo.shopList[i];
-              if (tmpShopCarMap.productId == shopCarMap.productId && tmpShopCarMap.itemIds == shopCarMap.itemIds) {
-                hasSameProductIndex = i;
-                shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
-                break;
-              }
-            }
-            toBuyInfo.shopNum = toBuyInfo.shopNum + this.data.buyNumber;
-            if (hasSameProductIndex > -1) {
-              toBuyInfo.shopList.splice(hasSameProductIndex, 1, shopCarMap);
-            } else {
-              toBuyInfo.shopList.push(shopCarMap);
-            }*/
-
         buyNowInfo.shopList.push(shopCarMap);
         buyNowInfo.kjId = this.data.kjId;
         return buyNowInfo;
