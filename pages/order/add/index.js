@@ -130,20 +130,20 @@ Page({
         let allProductPrice = 0;
 
         for (let i = 0; i < productList.length; i++) {
-            let carShopBean = productList[i];
-            allProductPrice += carShopBean.price * carShopBean.number;
+            let shoppingCartBean = productList[i];
+            allProductPrice += shoppingCartBean.price * shoppingCartBean.number;
             let productJsonStrTmp = '';
             if (i > 0) {
                 productJsonStrTmp = ",";
             }
             let inviter_id = 0;
-            let inviter_id_storge = util.getStorageSync('inviter_id_' + carShopBean.productId);
+            let inviter_id_storge = util.getStorageSync('inviter_id_' + shoppingCartBean.productId);
             if (inviter_id_storge) {
                 inviter_id = inviter_id_storge;
             }
 
-            console.log(carShopBean)
-            productJsonStrTmp += '{"product_id":' + carShopBean.productId + ',"count":' + carShopBean.number + ',"items":"' + carShopBean.itemIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
+            console.log(shoppingCartBean)
+            productJsonStrTmp += '{"product_id":' + shoppingCartBean.productId + ',"count":' + shoppingCartBean.number + ',"items":"' + shoppingCartBean.itemIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
             productJsonStr += productJsonStrTmp;
 
 

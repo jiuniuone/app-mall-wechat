@@ -205,22 +205,22 @@ Page({
         let list = that.data.productList.list;
         if (index !== "" && index != null) {
             // 添加判断当前商品购买数量是否超过当前商品可购买库存
-            let carShopBean = list[parseInt(index)];
-            let carShopBeanStores = 0;
+            let shoppingCartBean = list[parseInt(index)];
+            let shoppingCartStore = 0;
             util.request({
                 url: '/product/detail',
                 data: {
-                    id: carShopBean.productId
+                    id: shoppingCartBean.productId
                 },
                 success: function (res) {
-                    carShopBeanStores = res.data.data.basicInfo.stores;
-                    console.log(' currnet good id and stores is :', carShopBean.productId, carShopBeanStores)
-                    if (list[parseInt(index)].number < carShopBeanStores) {
+                    shoppingCartStore = res.data.data.basicInfo.stores;
+                    console.log(' currnet product id and stores is :', shoppingCartBean.productId, shoppingCartStore)
+                    if (list[parseInt(index)].number < shoppingCartStore) {
                         list[parseInt(index)].number++;
                         that.setProductList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), list);
                     }
                     that.setData({
-                        curTouchGoodStore: carShopBeanStores
+                        curTouchProductStore: shoppingCartStore
                     })
                 }
             })
@@ -299,19 +299,19 @@ Page({
                 util.hideLoading();
                 return;
             }
-            let carShopBean = shopList[i];
+            let shoppingCartBean = shopList[i];
             util.request({
-                url: '/product/detail?id=' + carShopBean.productId,
+                url: '/product/detail?id=' + shoppingCartBean.productId,
                 success: function (res) {
                     doneNumber++;
                     let product = res.data.data;
                     if (product) {
-                        if (product.stores < carShopBean.number) {
-                            util.alert('提示', carShopBean.name + ' 库存不足，请重新购买');
+                        if (product.stores < shoppingCartBean.number) {
+                            util.alert('提示', shoppingCartBean.name + ' 库存不足，请重新购买');
                             isFail = true;
                         }
                     } else {
-                        util.alert('提示', carShopBean.name + ' 已经失效，请调整购物车');
+                        util.alert('提示', shoppingCartBean.name + ' 已经失效，请调整购物车');
                         isFail = true;
                     }
                     if (isFail) {

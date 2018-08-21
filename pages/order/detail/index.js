@@ -97,13 +97,13 @@ Page({
         let reputations = [];
         for (let i = 0; i < order.items.length; i++) {
             let item = order.items[i];
-            let goodReputation = e.detail.value["goodReputation" + i];
-            let goodReputationRemark = e.detail.value["goodReputationRemark" + i];
+            let productReputation = e.detail.value["productReputation" + i];
+            let productReputationRemark = e.detail.value["productReputationRemark" + i];
 
             let reputations_json = {};
             reputations_json.id = item.id;
-            reputations_json.comment = goodReputation;
-            reputations_json.remark = goodReputationRemark;
+            reputations_json.comment = productReputation;
+            reputations_json.remark = productReputationRemark;
             reputations.push(reputations_json);
         }
         console.log(reputations)

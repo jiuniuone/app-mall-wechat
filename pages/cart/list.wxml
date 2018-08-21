@@ -21,7 +21,7 @@
                                   data-index="{{index}}">-
                             </view>
                             <input type="number" value="{{item.number}}" disabled/>
-                            <view class="jia-btn {{item.number==curTouchGoodStore? 'disabled' : ''}}"
+                            <view class="jia-btn {{item.number==curTouchProductStore? 'disabled' : ''}}"
                                   catchtap="jiaBtnTap"
                                   data-index="{{index}}">+
                             </view>

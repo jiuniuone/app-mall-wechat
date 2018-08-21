@@ -27,7 +27,7 @@
         </view>
         <view class="product-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view>
         <view class="product-price" style="color:#999;font-size:24rpx;">购买{{product.order_count}}次</view>
-        <view class="product-price" style="color:#999;font-size:24rpx;">共收到 {{product.good_reputation_count}} 次好评</view>
+        <view class="product-price" style="color:#999;font-size:24rpx;">共收到 {{product.product_reputation_count}} 次好评</view>
         <view class="product-info-fx">
             <image src='../../images/qd.png'/>
             <button open-type="share">分享</button>
