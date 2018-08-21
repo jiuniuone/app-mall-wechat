@@ -89,41 +89,40 @@ Page({
         let formId = e.detail.formId;
         let postJsonString = {};
         postJsonString.token = util.getStorageSync('token');
+        let value = e.detail.value;
+        console.log(value)
+        console.log("order", this.data.order)
+        let order = this.data.order;
         postJsonString.orderId = this.data.orderId;
         let reputations = [];
-        let i = 0;
-        while (e.detail.value["orderProductId" + i]) {
-            let orderProductId = e.detail.value["orderProductId" + i];
+        for (let i = 0; i < order.items.length; i++) {
+            let item = order.items[i];
             let goodReputation = e.detail.value["goodReputation" + i];
             let goodReputationRemark = e.detail.value["goodReputationRemark" + i];
 
             let reputations_json = {};
-            reputations_json.id = orderProductId;
-            reputations_json.reputation = goodReputation;
+            reputations_json.id = item.id;
+            reputations_json.comment = goodReputation;
             reputations_json.remark = goodReputationRemark;
-
             reputations.push(reputations_json);
-            i++;
         }
+        console.log(reputations)
         postJsonString.reputations = reputations;
         wx.showLoading();
         util.request({
-            url: '/order/reputation',
-            data: {
-                postJsonString: postJsonString
-            },
+            url: '/order/reputation', data: {json: postJsonString},
             success: (res) => {
                 wx.hideLoading();
                 if (res.data.code == 0) {
                     that.onShow();
                     // 模板消息，通知用户已评价
-                    let postJsonString = {};
-                    postJsonString.keyword1 = {value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177'}
-                    let keywords2 = '感谢您的评价，期待您的再次光临！';
-                    if (app.globalData.order_reputation_score) {
-                        keywords2 += app.globalData.order_reputation_score + '积分奖励已发放至您的账户。';
-                    }
-                    postJsonString.keyword2 = {value: keywords2, color: '#173177'}
+                    //let postJsonString = {};
+                    //postJsonString.keyword1 = {value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177'}
+                    //let keywords2 = '感谢您的评价，期待您的再次光临！';
+                    //if (app.globalData.order_reputation_score) {
+                    //    keywords2 += app.globalData.order_reputation_score + '积分奖励已发放至您的账户。';
+                    // }
+                    //postJsonString.keyword2 = {value: keywords2, color: '#173177'}
 
                 }
             }
