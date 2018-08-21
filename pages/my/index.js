@@ -1,5 +1,5 @@
 const app = getApp();
-var util = require('../../utils/util.js');
+let util = require('../../utils/util.js');
 Page({
     data: {
         balance: 0,
@@ -31,7 +31,7 @@ Page({
             wx.showModal({title: '提示', content: '无法获取手机号码', showCancel: false})
             return;
         }
-        var that = this;
+        let that = this;
         util.request({
             url: '/user/wxapp/bindMobile',
             data: {
@@ -58,12 +58,12 @@ Page({
         })
     },
     loadMember: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/member/detail', data: {token: util.getStorageSync('token')},
             success: function (res) {
                 if (res.data.code == 0) {
-                    var member = res.data.data;
+                    let member = res.data.data;
                     that.setData({member: member});
                 }
             }
@@ -71,7 +71,7 @@ Page({
 
     },
     scoresign: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/member/sign', data: {token: util.getStorageSync('token')},
             success: function (res) {

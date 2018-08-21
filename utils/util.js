@@ -1,5 +1,5 @@
-//const urlPrefix = "http://192.168.1.176/api/mall";
-const urlPrefix = "http://192.168.31.80/api/mall";
+const urlPrefix = "http://192.168.1.176/api/mall";
+//const urlPrefix = "http://192.168.31.80/api/mall";
 function request(obj) {
     obj.url = urlPrefix + obj.url;
     return wx.request(obj);
@@ -7,12 +7,12 @@ function request(obj) {
 
 
 function formatTime(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
     return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
 }
 

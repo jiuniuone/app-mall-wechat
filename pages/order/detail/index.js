@@ -1,5 +1,5 @@
-var util = require('../../../utils/util.js');
-var app = getApp();
+let util = require('../../../utils/util.js');
+let app = getApp();
 Page({
     data: {
         orderId: 0,
@@ -7,14 +7,14 @@ Page({
         yunPrice: "0.00"
     },
     onLoad: function (e) {
-        var orderId = e.id;
+        let orderId = e.id;
         this.data.orderId = orderId;
         this.setData({
             orderId: orderId
         });
     },
     onShow: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/order/detail',
             data: {
@@ -30,10 +30,10 @@ Page({
                 }
             }
         })
-        var yunPrice = parseFloat(this.data.yunPrice);
-        var allprice = 0;
-        var productList = this.data.productList;
-        for (var i = 0; i < productList.length; i++) {
+        let yunPrice = parseFloat(this.data.yunPrice);
+        let allprice = 0;
+        let productList = this.data.productList;
+        for (let i = 0; i < productList.length; i++) {
             allprice += parseFloat(productList[0].price) * productList[0].number;
         }
         this.setData({
@@ -42,7 +42,7 @@ Page({
         });
     },
     wuliuDetailsTap: function (e) {
-        var orderId = e.currentTarget.dataset.id;
+        let orderId = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: "/pages/logistics/index?id=" + orderId
         })

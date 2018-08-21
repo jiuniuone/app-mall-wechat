@@ -1,6 +1,6 @@
-var commonCityData = require('../../../utils/city.js');
-var util = require('../../../utils/util.js')
-var app = getApp()
+let commonCityData = require('../../../utils/city.js');
+let util = require('../../../utils/util.js')
+let app = getApp()
 Page({
     data: {
         provinces: [],
@@ -18,12 +18,12 @@ Page({
     },
     bindSave: function (e) {
         console.log(e.detail)
-        var that = this;
-        var linkMan = e.detail.value.linkMan;
-        var address = e.detail.value.address;
-        var mobile = e.detail.value.mobile;
-        var code = e.detail.value.code;
-        var isDefault = e.detail.value.isDefault;
+        let that = this;
+        let linkMan = e.detail.value.linkMan;
+        let address = e.detail.value.address;
+        let mobile = e.detail.value.mobile;
+        let code = e.detail.value.code;
+        let isDefault = e.detail.value.isDefault;
 
         if (linkMan == "") {
             return util.alert('提示', '请填写联系人姓名');
@@ -37,8 +37,8 @@ Page({
         if (this.data.selCity == "请选择") {
             return util.alert('提示', '请选择地区');
         }
-        var cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
-        var districtId;
+        let cityId = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].id;
+        let districtId;
         if (this.data.selDistrict == "请选择" || !this.data.selDistrict) {
             districtId = '';
         } else {
@@ -50,8 +50,8 @@ Page({
         if (code == "") {
             return util.alert('提示', '请填写邮编');
         }
-        var apiAddoRuPDATE = "add";
-        var apiAddid = that.data.id;
+        let apiAddoRuPDATE = "add";
+        let apiAddid = that.data.id;
         if (apiAddid) {
             apiAddoRuPDATE = "update";
         } else {
@@ -89,26 +89,26 @@ Page({
     },
     initCityData: function (level, obj) {
         if (level == 1) {
-            var pinkArray = [];
-            for (var i = 0; i < commonCityData.cityData.length; i++) {
+            let pinkArray = [];
+            for (let i = 0; i < commonCityData.cityData.length; i++) {
                 pinkArray.push(commonCityData.cityData[i].name);
             }
             this.setData({
                 provinces: pinkArray
             });
         } else if (level == 2) {
-            var pinkArray = [];
-            var dataArray = obj.cityList
-            for (var i = 0; i < dataArray.length; i++) {
+            let pinkArray = [];
+            let dataArray = obj.cityList
+            for (let i = 0; i < dataArray.length; i++) {
                 pinkArray.push(dataArray[i].name);
             }
             this.setData({
                 citys: pinkArray
             });
         } else if (level == 3) {
-            var pinkArray = [];
-            var dataArray = obj.districtList
-            for (var i = 0; i < dataArray.length; i++) {
+            let pinkArray = [];
+            let dataArray = obj.districtList
+            for (let i = 0; i < dataArray.length; i++) {
                 pinkArray.push(dataArray[i].name);
             }
             this.setData({
@@ -118,7 +118,7 @@ Page({
 
     },
     bindPickerProvinceChange: function (event) {
-        var selIterm = commonCityData.cityData[event.detail.value];
+        let selIterm = commonCityData.cityData[event.detail.value];
         this.setData({
             selProvince: selIterm.name,
             selProvinceIndex: event.detail.value,
@@ -130,7 +130,7 @@ Page({
         this.initCityData(2, selIterm)
     },
     bindPickerCityChange: function (event) {
-        var selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[event.detail.value];
+        let selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[event.detail.value];
         this.setData({
             selCity: selIterm.name,
             selCityIndex: event.detail.value,
@@ -140,7 +140,7 @@ Page({
         this.initCityData(3, selIterm)
     },
     bindPickerChange: function (event) {
-        var selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[event.detail.value];
+        let selIterm = commonCityData.cityData[this.data.selProvinceIndex].cityList[this.data.selCityIndex].districtList[event.detail.value];
         if (selIterm && selIterm.name && event.detail.value) {
             this.setData({
                 selDistrict: selIterm.name,
@@ -149,9 +149,9 @@ Page({
         }
     },
     onLoad: function (e) {
-        var that = this;
+        let that = this;
         this.initCityData(1);
-        var id = e.id;
+        let id = e.id;
         if (id) {
             wx.showLoading();
             util.request({
@@ -181,14 +181,14 @@ Page({
         }
     },
     setDBSaveAddressId: function (data) {
-        var retSelIdx = 0;
-        for (var i = 0; i < commonCityData.cityData.length; i++) {
+        let retSelIdx = 0;
+        for (let i = 0; i < commonCityData.cityData.length; i++) {
             if (data.provinceId == commonCityData.cityData[i].id) {
                 this.data.selProvinceIndex = i;
-                for (var j = 0; j < commonCityData.cityData[i].cityList.length; j++) {
+                for (let j = 0; j < commonCityData.cityData[i].cityList.length; j++) {
                     if (data.cityId == commonCityData.cityData[i].cityList[j].id) {
                         this.data.selCityIndex = j;
-                        for (var k = 0; k < commonCityData.cityData[i].cityList[j].districtList.length; k++) {
+                        for (let k = 0; k < commonCityData.cityData[i].cityList[j].districtList.length; k++) {
                             if (data.districtId == commonCityData.cityData[i].cityList[j].districtList[k].id) {
                                 this.data.selDistrictIndex = k;
                             }
@@ -201,8 +201,8 @@ Page({
     selectCity: function () {
     },
     deleteAddress: function (e) {
-        var that = this;
-        var id = e.currentTarget.dataset.id;
+        let that = this;
+        let id = e.currentTarget.dataset.id;
         wx.showModal({
             title: '提示',
             content: '确定要删除该收货地址吗？',

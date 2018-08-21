@@ -1,5 +1,5 @@
-var app = getApp()
-var util = require('../../../utils/util.js');
+let app = getApp()
+let util = require('../../../utils/util.js');
 Page({
     data: {
         totalScoreToPay: 0,
@@ -14,17 +14,17 @@ Page({
         curCoupon: null // 当前选择使用的优惠券
     },
     onShow: function () {
-        var that = this;
-        var shopList = [];
+        let that = this;
+        let shopList = [];
         console.log(that.data);
         if ("buyNow" == that.data.orderType) {//立即购买下单
-            var buyNowInfoMem = util.getStorageSync('buyNowInfo');
+            let buyNowInfoMem = util.getStorageSync('buyNowInfo');
             that.data.kjId = buyNowInfoMem.kjId;
             if (buyNowInfoMem && buyNowInfoMem.shopList) {
                 shopList = buyNowInfoMem.shopList
             }
         } else {//购物车下单
-            var shoppingCartInfoMem = util.getStorageSync('shoppingCartInfo');
+            let shoppingCartInfoMem = util.getStorageSync('shoppingCartInfo');
             that.data.kjId = shoppingCartInfoMem.kjId;
             if (shoppingCartInfoMem && shoppingCartInfoMem.shopList) {
                 shopList = shoppingCartInfoMem.shopList.filter(entity => {
@@ -37,19 +37,19 @@ Page({
     },
 
     onLoad: function (e) {
-        var that = this;
+        let that = this;
         that.setData({orderType: e.orderType});
     },
     createOrder: function (e) {
         wx.showLoading();
-        var that = this;
-        var loginToken = util.getStorageSync('token');
-        var remark = "";
+        let that = this;
+        let loginToken = util.getStorageSync('token');
+        let remark = "";
         if (e) {
             remark = e.detail.value.remark; // 备注信息
         }
 
-        var postData = {
+        let postData = {
             token: loginToken,
             productJsonStr: that.data.productJsonStr,
             remark: remark
@@ -85,7 +85,7 @@ Page({
                     // 清空购物车数据
                     wx.removeStorageSync('shoppingCartInfo');
                 }
-                var data = res.data.data;
+                let data = res.data.data;
                 if (!e) {
                     that.setData({
                         totalScoreToPay: data.score,
@@ -103,7 +103,7 @@ Page({
         })
     },
     initShippingAddress: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/address/default',
             data: {
@@ -124,15 +124,15 @@ Page({
         })
     },
     processYunfei: function () {
-        var that = this;
-        var productList = this.data.productList;
-        var productJsonStr = "[";
-        var allProductPrice = 0;
+        let that = this;
+        let productList = this.data.productList;
+        let productJsonStr = "[";
+        let allProductPrice = 0;
 
         for (let i = 0; i < productList.length; i++) {
             let carShopBean = productList[i];
             allProductPrice += carShopBean.price * carShopBean.number;
-            var productJsonStrTmp = '';
+            let productJsonStrTmp = '';
             if (i > 0) {
                 productJsonStrTmp = ",";
             }
@@ -165,7 +165,7 @@ Page({
         })
     },
     getMyCoupons: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/discounts/my',
             data: {
@@ -174,7 +174,7 @@ Page({
             },
             success: function (res) {
                 if (res.data.code == 0) {
-                    var coupons = res.data.data.filter(entity => {
+                    let coupons = res.data.data.filter(entity => {
                         return entity.moneyHreshold <= that.data.allProductAndYunPrice;
                     });
                     if (coupons.length > 0) {

@@ -1,5 +1,5 @@
-var util = require('../../../utils/util.js')
-var app = getApp()
+let util = require('../../../utils/util.js')
+let app = getApp()
 Page({
     data: {
         coupons: []
@@ -10,13 +10,13 @@ Page({
         this.getMyCoupons();
     },
     getMyCoupons: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/discounts/my',
             data: {token: util.getStorageSync('token'),},
             success: function (res) {
                 if (res.data.code == 0) {
-                    var coupons = res.data.data;
+                    let coupons = res.data.data;
                     if (coupons.length > 0) {
                         that.setData({coupons: coupons});
                     }

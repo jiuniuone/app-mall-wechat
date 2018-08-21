@@ -1,12 +1,12 @@
-var util = require('../../../utils/util.js')
-var app = getApp()
+let util = require('../../../utils/util.js')
+let app = getApp()
 Page({
     data: {
         addressList: []
     },
 
     selectTap: function (e) {
-        var id = e.currentTarget.dataset.id;
+        let id = e.currentTarget.dataset.id;
         util.request({
             url: '/address/update',
             data: {
@@ -41,7 +41,7 @@ Page({
         this.initShippingAddress();
     },
     initShippingAddress: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/address/list',
             data: {

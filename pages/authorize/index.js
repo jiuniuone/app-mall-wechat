@@ -1,5 +1,5 @@
-var util = require('../../utils/util.js')
-var app = getApp();
+let util = require('../../utils/util.js')
+let app = getApp();
 Page({
     data: {},
     onLoad: function (options) {
@@ -65,10 +65,10 @@ Page({
         })
     },
     registerUser: function () {
-        var that = this;
+        let that = this;
         wx.login({
             success: function (res) {
-                var code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
+                let code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
                 wx.getUserInfo({
                     success: function (res) {
                         util.request({

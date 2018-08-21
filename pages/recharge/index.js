@@ -1,6 +1,6 @@
-var wxpay = require('../../utils/pay.js')
-var util = require('../../utils/util.js');
-var app = getApp()
+let wxpay = require('../../utils/pay.js')
+let util = require('../../utils/util.js');
+let app = getApp()
 Page({
 
     /**
@@ -76,8 +76,8 @@ Page({
         wx.navigateBack({})
     },
     bindSave: function (e) {
-        var that = this;
-        var amount = e.detail.value.amount;
+        let that = this;
+        let amount = e.detail.value.amount;
 
         if (amount == "" || amount * 1 < 0) {
             wx.showModal({

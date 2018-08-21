@@ -1,4 +1,4 @@
-var cityData = [{
+let cityData = [{
     "name": "北京市",
     "id": 110000,
     "cityList": [{"districtList": [], "name": "东城区", "pid": 110000, "id": 110101}, {

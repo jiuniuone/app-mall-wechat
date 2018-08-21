@@ -1,7 +1,7 @@
-var util = require('./utils/util.js');
+let util = require('./utils/util.js');
 App({
     onLaunch: function () {
-        var that = this;
+        let that = this;
 
         //  获取商城名称
         util.request({

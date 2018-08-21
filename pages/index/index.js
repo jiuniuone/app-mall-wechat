@@ -1,5 +1,5 @@
-var util = require('../../utils/util.js');
-var app = getApp();
+let util = require('../../utils/util.js');
+let app = getApp();
 Page({
     data: {
         indicatorDots: true,
@@ -52,7 +52,7 @@ Page({
         })
     },
     onLoad: function () {
-        var that = this
+        let that = this
         wx.setNavigationBarTitle({
             title: util.getStorageSync('mallName')
         })
@@ -72,9 +72,9 @@ Page({
             util.request({
                 url: '/product/category/all',
                 success: function (res) {
-                    var categories = [{id: 0, name: "全部"}];
+                    let categories = [{id: 0, name: "全部"}];
                     if (res.data.code == 0) {
-                        for (var i = 0; i < res.data.data.length; i++) {
+                        for (let i = 0; i < res.data.data.length; i++) {
                             categories.push(res.data.data[i]);
                         }
                     }
@@ -99,7 +99,7 @@ Page({
             categoryId = "";
         }
         console.log(categoryId)
-        var that = this;
+        let that = this;
         util.request({
             url: '/product/list',
             data: {
@@ -111,14 +111,14 @@ Page({
                     product: [],
                     loadingMoreHidden: true
                 });
-                var product = [];
+                let product = [];
                 if (res.data.code != 0 || res.data.data.length == 0) {
                     that.setData({
                         loadingMoreHidden: false,
                     });
                     return;
                 }
-                for (var i = 0; i < res.data.data.length; i++) {
+                for (let i = 0; i < res.data.data.length; i++) {
                     product.push(res.data.data[i]);
                 }
                 that.setData({
@@ -128,7 +128,7 @@ Page({
         })
     },
     getCoupons: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/discounts/coupons',
             success: function (res) {
@@ -139,7 +139,7 @@ Page({
         })
     },
     gitCoupon: function (e) {
-        var that = this;
+        let that = this;
         util.request({
             url: '/discounts/fetch',
             data: {
@@ -208,7 +208,7 @@ Page({
         }
     },
     getNotice: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/notice/list',
             data: {pageSize: 5},

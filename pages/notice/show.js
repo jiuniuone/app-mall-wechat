@@ -1,10 +1,10 @@
-var app = getApp();
-var WxParse = require('../../wxParse/wxParse.js');
-var util = require('../../utils/util.js')
+let app = getApp();
+let WxParse = require('../../wxParse/wxParse.js');
+let util = require('../../utils/util.js')
 Page({
     data: {},
     onLoad: function (options) {
-        var that = this;
+        let that = this;
         util.request({
             url: '/notice/detail',
             data: {id: options.id},

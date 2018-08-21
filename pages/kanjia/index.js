@@ -1,6 +1,6 @@
-var app = getApp();
-var WxParse = require('../../wxParse/wxParse.js');
-var util = require('../../utils/util.js')
+let app = getApp();
+let WxParse = require('../../wxParse/wxParse.js');
+let util = require('../../utils/util.js')
 
 Page({
     data: {
@@ -22,7 +22,7 @@ Page({
         this.data.id = e.id;
         this.data.kjId = e.kjId;
         this.data.joiner = e.joiner;
-        var that = this;
+        let that = this;
         util.request({
             url: '/product/detail',
             data: {
@@ -43,7 +43,7 @@ Page({
         this.getKanjiaInfoMyHelp(e.kjId, e.joiner);
     },
     onShareAppMessage: function () {
-        var that = this;
+        let that = this;
         return {
             title: "帮我来砍价",
             path: "/pages/kanjia/index?kjId=" + that.data.kjId + "&joiner=" + that.data.joiner + "&id=" + that.data.id,
@@ -56,7 +56,7 @@ Page({
         }
     },
     getVideoSrc: function (videoId) {
-        var that = this;
+        let that = this;
         util.request({
             url: '/media/video/detail',
             data: {
@@ -72,7 +72,7 @@ Page({
         })
     },
     getKanjiaInfo: function (kjid, joiner) {
-        var that = this;
+        let that = this;
         util.request({
             url: '/product/kanjia/info',
             data: {
@@ -95,7 +95,7 @@ Page({
         })
     },
     getKanjiaInfoMyHelp: function (kjid, joiner) {
-        var that = this;
+        let that = this;
         util.request({
             url: '/product/kanjia/myHelp',
             data: {
@@ -114,7 +114,7 @@ Page({
         })
     },
     helpKanjia: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/product/kanjia/help',
             data: {
