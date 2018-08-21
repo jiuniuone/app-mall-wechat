@@ -15,7 +15,6 @@ Page({
         product: [],
         scrollTop: 0,
         loadingMoreHidden: true,
-
         hasNoCoupons: true,
         coupons: [],
         searchInput: '',

@@ -37,16 +37,6 @@ App({
                 }
             }
         })
-        // 获取砍价设置
-        util.request({
-            url: '/product/kanjia/list',
-            data: {},
-            success: function (res) {
-                if (res.data.code == 0) {
-                    that.globalData.kanjiaList = res.data.data.result;
-                }
-            }
-        })
         // 判断是否登录
         let token = util.getStorageSync('token');
         if (!token) {

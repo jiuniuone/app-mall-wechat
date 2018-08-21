@@ -74,7 +74,6 @@ Page({
             }
         })
         this.reputation(e.id);
-        this.getKanjiaInfo(e.id);
     },
     goShopCar: function () {
         wx.reLaunch({
@@ -403,52 +402,4 @@ Page({
             }
         })
     },
-    getKanjiaInfo: function (gid) {
-        let that = this;
-        if (!app.globalData.kanjiaList || app.globalData.kanjiaList.length == 0) {
-            that.setData({
-                curProductKanjia: null
-            });
-            return;
-        }
-        let curProductKanjia = app.globalData.kanjiaList.find(ele => {
-            return ele.productId == gid
-        });
-        if (curProductKanjia) {
-            that.setData({
-                curProductKanjia: curProductKanjia
-            });
-        } else {
-            that.setData({
-                curProductKanjia: null
-            });
-        }
-    },
-    goKanjia: function () {
-        let that = this;
-        if (!that.data.curProductKanjia) {
-            return;
-        }
-        util.request({
-            url: '/product/kanjia/join',
-            data: {
-                kjid: that.data.curProductKanjia.id,
-                token: util.getStorageSync('token')
-            },
-            success: function (res) {
-                if (res.data.code == 0) {
-                    console.log(res.data);
-                    wx.navigateTo({
-                        url: "/pages/kanjia/index?kjId=" + res.data.data.kjId + "&joiner=" + res.data.data.uid + "&id=" + res.data.data.productId
-                    })
-                } else {
-                    wx.showModal({
-                        title: '错误',
-                        content: res.data.msg,
-                        showCancel: false
-                    })
-                }
-            }
-        })
-    },
-})
+});
