@@ -16,17 +16,6 @@ App({
             }
         })
         util.request({
-            url: '/score/send/rule',
-            data: {
-                code: 'goodReputation'
-            },
-            success: function (res) {
-                if (res.data.code == 0) {
-                    that.globalData.order_reputation_score = res.data.data[0].score;
-                }
-            }
-        })
-        util.request({
             url: '/config',
             data: {
                 key: 'recharge_amount_min'
