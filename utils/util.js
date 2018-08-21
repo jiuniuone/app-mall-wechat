@@ -1,5 +1,5 @@
-const urlPrefix = "http://192.168.1.176/api/mall";
-
+//const urlPrefix = "http://192.168.1.176/api/mall";
+const urlPrefix = "http://192.168.31.80/api/mall";
 function request(obj) {
     obj.url = urlPrefix + obj.url;
     return wx.request(obj);
