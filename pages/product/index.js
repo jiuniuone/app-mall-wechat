@@ -381,7 +381,7 @@ Page({
             success: function (res) {
                 if (res.data.code == 0) {
                     that.setData({
-                        reputation: res.data.data
+                        reputations: res.data.data
                     });
                 }
             }
