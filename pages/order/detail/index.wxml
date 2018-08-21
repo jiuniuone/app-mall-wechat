@@ -25,18 +25,18 @@
                 </view>
             </view>
         </view>
-        <block wx:if="{{order.logistics}}">
-            <view wx:if="{{order.logisticsTraces}}" class="wuliu-box">
+        <block wx:if="{{order.shipper}}">
+            <view wx:if="{{order.logistics_traces}}" class="wuliu-box">
                 <view class="icon-box">
                     <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
                 </view>
                 <view class="right-text" bindtap="wuliuDetailsTap" data-id="{{order.id}}">
-                    <view class="order-number">快递单号：{{order.logistics.trackingNumber}}</view>
-                    <block wx:if="{{order.logisticsTraces}}">
+                    <view class="order-number">快递单号：{{order.tracking_number}}</view>
+                    <block wx:if="{{order.logistics_traces}}">
                         <view class="wuliu-text">
-                            {{order.logisticsTraces[order.logisticsTraces.length-1].AcceptStation}}
+                            {{order.logistics_traces[0].event}}
                         </view>
-                        <view class="wuliu-date">{{order.logisticsTraces[order.logisticsTraces.length-1].AcceptTime}}
+                        <view class="wuliu-date">{{order.logistics_traces[0].event_time}}
                         </view>
                     </block>
                 </view>
@@ -49,7 +49,7 @@
                     <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
                 </view>
                 <view class="right-text">
-                    <view class="order-number">快递单号：{{order.logistics.trackingNumber}}</view>
+                    <view class="order-number">快递单号：{{order.tracking_number}}</view>
                     <view class="wuliu-text">暂无物流信息</view>
                 </view>
             </view>

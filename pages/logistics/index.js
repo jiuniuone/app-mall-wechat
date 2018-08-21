@@ -1,13 +1,12 @@
-var util = require('../../utils/util.js');
-var app = getApp()
+let util = require('../../utils/util.js');
+let app = getApp()
 Page({
     data: {},
     onLoad: function (e) {
-        var orderId = e.id;
-        this.data.orderId = orderId;
+        this.data.orderId = e.id;
     },
     onShow: function () {
-        var that = this;
+        let that = this;
         util.request({
             url: '/order/detail',
             data: {
@@ -17,16 +16,11 @@ Page({
             success: (res) => {
                 wx.hideLoading();
                 if (res.data.code != 0) {
-                    wx.showModal({
-                        title: '错误',
-                        content: res.data.msg,
-                        showCancel: false
-                    })
+                    util.alert('错误', res.data.message);
                     return;
                 }
                 that.setData({
-                    orderDetail: res.data.data,
-                    logisticsTraces: res.data.data.logisticsTraces.reverse()
+                    order: res.data.data,
                 });
             }
         })
